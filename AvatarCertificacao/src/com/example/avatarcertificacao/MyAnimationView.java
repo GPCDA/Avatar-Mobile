@@ -22,26 +22,34 @@ public class MyAnimationView extends ImageView {
 	private int play_frame = 0;
 	private long last_tick = 0;
 
+	private int genero;
+
 	public MyAnimationView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		mContext = context;
 	}
 
 	/*ideally this should be in a background thread*/
-	public void loadAnimation(String prefix, int nframes) {
-//		mLexemaList.clear();
-//		int delay = 100;
-//		for (int x = 0; x < nframes; x++) {
-//			String name = prefix + "_" + x;
-//			Log.d(TAG, "loading animation frame: " + name);
-//			int res_id = mContext.getResources().getIdentifier(name, "drawable", mContext.getPackageName());
-//			BitmapDrawable d = (BitmapDrawable) mContext.getResources().getDrawable(res_id);
-//			Lexema lexema = new Lexema(delay,d.getBitmap());
-//			delay += 50;
-//			mLexemaList.add(lexema);
-//		}
-		
-		mLexemaList = Util.loadList(this.getContext(), "masculino.txt");
+	public void loadAnimation(String prefix, int nframes, int genero) {
+		//		mLexemaList.clear();
+		//		int delay = 100;
+		//		for (int x = 0; x < nframes; x++) {
+		//			String name = prefix + "_" + x;
+		//			Log.d(TAG, "loading animation frame: " + name);
+		//			int res_id = mContext.getResources().getIdentifier(name, "drawable", mContext.getPackageName());
+		//			BitmapDrawable d = (BitmapDrawable) mContext.getResources().getDrawable(res_id);
+		//			Lexema lexema = new Lexema(delay,d.getBitmap());
+		//			delay += 50;
+		//			mLexemaList.add(lexema);
+		//		}
+		if (mLexemaList != null) {
+			mLexemaList.clear();
+		}
+		if (genero == Util.MASCULINO) {
+			mLexemaList = Util.loadList(this.getContext(), "masculino.txt");
+		} else {
+			mLexemaList = Util.loadList(this.getContext(), "feminino.txt");
+		}
 	}
 
 	@Override
@@ -67,7 +75,7 @@ public class MyAnimationView extends ImageView {
 			int draw_y = 0;
 			if (time >= mLexemaList.get(play_frame).getDelay()) //the delay time has passed. set next frame
 			{
-				System.out.println("delay:"+mLexemaList.get(play_frame).getDelay());
+				System.out.println("delay:" + mLexemaList.get(play_frame).getDelay());
 				last_tick = System.currentTimeMillis();
 				c.drawBitmap(mLexemaList.get(play_frame).getImage(), draw_x, draw_y, null);
 				play_frame++;
@@ -84,12 +92,13 @@ public class MyAnimationView extends ImageView {
 		mStartPlaying = true;
 		postInvalidate();
 	}
-	
-	public void stopAnimation(){
+
+	public void stopAnimation() {
 		mStartPlaying = false;
 		postInvalidate();
 	}
-	public void rewindAnimation(){
+
+	public void rewindAnimation() {
 		play_frame = 0;
 		postInvalidate();
 	}

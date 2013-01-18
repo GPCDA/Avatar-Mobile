@@ -8,6 +8,10 @@ import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
 
 public class Util {
+	public static final int MASCULINO = 1;
+	public static final int FEMININO = 2;
+	
+	
 	public static ArrayList<Lexema> loadList(Context context,String fileName) {
 		ArrayList<Lexema>mList = new ArrayList<Lexema>();
 		try {

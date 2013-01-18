@@ -27,10 +27,8 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		setContentView(R.layout.activity_main);
-
 		animationView = (MyAnimationView) findViewById(R.id.anim_view);
-		animationView.loadAnimation("shark", 16);
+		animationView.loadAnimation("shark", 16,Util.MASCULINO);
 
 		btnPlayPause = (Button) findViewById(R.id.play_pause_button);
 		btnPlayPause.setOnClickListener(this);
@@ -56,7 +54,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.play_pause_button:
-				playMedia();
+				playMedia(Util.MASCULINO);
 				break;
 			case R.id.stop_button:
 				stopMedia();
@@ -66,6 +64,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 				break;
 			case R.id.next_button:
 				//TODO proximo item da lista
+				playMedia(Util.FEMININO);
 				break;
 		}
 	}
@@ -75,23 +74,28 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		this.stopSound();
 	}
 
-	private void playMedia() {
+	private void playMedia(int genero) {
+		this.animationView.loadAnimation("", 0,genero);
 		this.animationView.playAnimation();
-		this.playSound();
+		this.playSound(genero);
 	}
 
-	private void playSound() {
-		mp = MediaPlayer.create(this, R.raw.teste_masculino);
+	private void playSound(int genero) {
+		int sound;
+		if(genero == Util.MASCULINO){
+			mp = MediaPlayer.create(this, R.raw.teste_masculino);
+		} else {
+			mp = MediaPlayer.create(this, R.raw.teste_feminino);
+		}
 		AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC,
-		    audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-		    AudioManager.FLAG_PLAY_SOUND);
+		audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
+				AudioManager.FLAG_PLAY_SOUND);
 		//mp.setVolume(currentVolume, currentVolume);
 		mp.start();
 	}
 
 	private void stopSound() {
 		mp.stop();
-	}	
+	}
 
 }
