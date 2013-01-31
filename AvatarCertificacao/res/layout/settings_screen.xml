@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@android:color/white"
+    android:orientation="vertical"
+    android:paddingBottom="20dp" >
+
+    <TextView
+        android:id="@+idSettingsScreen/geral_txt_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:background="@android:color/darker_gray"
+        android:text="@string/geral"
+        android:textColor="@android:color/black" />
+
+    <ListView
+        android:id="@+idSettingsScreen/geral_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+idSettingsScreen/geral_txt_view" >
+    </ListView>
+
+    <TextView
+        android:id="@+idSettingsScreen/notificacoes_txt_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="2dp"
+        android:layout_below="@+idSettingsScreen/geral_list_view"
+        android:background="@android:color/darker_gray"
+        android:text="@string/notificacoes"
+        android:textColor="@android:color/black" />
+
+    <ListView
+        android:id="@+idSettingsScreen/notificacoes_list_view"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+idSettingsScreen/notificacoes_txt_view" >
+    </ListView>
+
+</RelativeLayout>

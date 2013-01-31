@@ -14,60 +14,95 @@ public final class R {
         public static final int a=0x7f020000;
         public static final int emai=0x7f020001;
         public static final int emin=0x7f020002;
-        public static final int f1=0x7f020003;
-        public static final int f2=0x7f020004;
-        public static final int fa=0x7f020005;
-        public static final int femin=0x7f020006;
-        public static final int ff1=0x7f020007;
-        public static final int fi1min=0x7f020008;
-        public static final int fk1=0x7f020009;
-        public static final int fk2=0x7f02000a;
-        public static final int fomai=0x7f02000b;
-        public static final int fomin=0x7f02000c;
-        public static final int fp1=0x7f02000d;
-        public static final int fr1=0x7f02000e;
-        public static final int frepouso=0x7f02000f;
-        public static final int fs1min=0x7f020010;
-        public static final int ft1=0x7f020011;
-        public static final int ft2=0x7f020012;
-        public static final int fu=0x7f020013;
-        public static final int i1min=0x7f020014;
-        public static final int ic_action_search=0x7f020015;
-        public static final int ic_launcher=0x7f020016;
-        public static final int ic_media_embed_play=0x7f020017;
-        public static final int ic_media_pause=0x7f020018;
-        public static final int ic_media_stop=0x7f020019;
-        public static final int k2=0x7f02001a;
-        public static final int k3=0x7f02001b;
-        public static final int l1min=0x7f02001c;
-        public static final int l2min=0x7f02001d;
-        public static final int omai=0x7f02001e;
-        public static final int omin=0x7f02001f;
-        public static final int p1=0x7f020020;
-        public static final int repouso=0x7f020021;
-        public static final int s1min=0x7f020022;
-        public static final int t1=0x7f020023;
-        public static final int t2=0x7f020024;
-        public static final int tick_background=0x7f020025;
-        public static final int u=0x7f020026;
+        public static final int expander_ic_maximized=0x7f020003;
+        public static final int f1=0x7f020004;
+        public static final int f2=0x7f020005;
+        public static final int fa=0x7f020006;
+        public static final int femin=0x7f020007;
+        public static final int ff1=0x7f020008;
+        public static final int fi1min=0x7f020009;
+        public static final int fk1=0x7f02000a;
+        public static final int fk2=0x7f02000b;
+        public static final int fomai=0x7f02000c;
+        public static final int fomin=0x7f02000d;
+        public static final int fp1=0x7f02000e;
+        public static final int fr1=0x7f02000f;
+        public static final int frepouso=0x7f020010;
+        public static final int fs1min=0x7f020011;
+        public static final int ft1=0x7f020012;
+        public static final int ft2=0x7f020013;
+        public static final int fu=0x7f020014;
+        public static final int i1min=0x7f020015;
+        public static final int ic_action_search=0x7f020016;
+        public static final int ic_launcher=0x7f020017;
+        public static final int ic_media_embed_play=0x7f020018;
+        public static final int ic_media_pause=0x7f020019;
+        public static final int ic_media_stop=0x7f02001a;
+        public static final int ic_menu_manage=0x7f02001b;
+        public static final int ic_menu_paste_holo_light=0x7f02001c;
+        public static final int k2=0x7f02001d;
+        public static final int k3=0x7f02001e;
+        public static final int l1min=0x7f02001f;
+        public static final int l2min=0x7f020020;
+        public static final int logovocallab=0x7f020021;
+        public static final int omai=0x7f020022;
+        public static final int omin=0x7f020023;
+        public static final int p1=0x7f020024;
+        public static final int repouso=0x7f020025;
+        public static final int s1min=0x7f020026;
+        public static final int t1=0x7f020027;
+        public static final int t2=0x7f020028;
+        public static final int tick_background=0x7f020029;
+        public static final int u=0x7f02002a;
     }
     public static final class id {
         public static final int anim_view=0x7f080005;
         public static final int avisosTextView=0x7f080007;
         public static final int btn_container=0x7f080000;
-        public static final int courseListView=0x7f080009;
         public static final int courseTextView=0x7f080006;
         public static final int mensagensTextView=0x7f080008;
-        public static final int menu_settings=0x7f08000a;
+        public static final int menu_settings=0x7f080009;
         public static final int next_button=0x7f080004;
         public static final int play_pause_button=0x7f080002;
         public static final int prev_button=0x7f080001;
         public static final int stop_button=0x7f080003;
     }
+    public static final class idCourseListScreen {
+        public static final int courseListView=0x7f090000;
+    }
+    public static final class idLoginScreen {
+        public static final int first_form_item=0x7f0a0000;
+        public static final int fourth_form_item=0x7f0a0006;
+        public static final int login_btn=0x7f0a0007;
+        public static final int login_edit_text=0x7f0a0003;
+        public static final int second_form_item=0x7f0a0001;
+        public static final int senha_edit_text=0x7f0a0005;
+        public static final int third_form_item=0x7f0a0004;
+        public static final int url_moodle_edit_text=0x7f0a0002;
+    }
+    public static final class idMainScreen {
+        public static final int btn_courses=0x7f0b0000;
+        public static final int btn_settings=0x7f0b0001;
+    }
+    public static final class idSettingsListItem {
+        public static final int descriptionTextView=0x7f0c0001;
+        public static final int titleTextView=0x7f0c0000;
+    }
+    public static final class idSettingsScreen {
+        public static final int geral_list_view=0x7f0d0001;
+        public static final int geral_txt_view=0x7f0d0000;
+        public static final int notificacoes_list_view=0x7f0d0003;
+        public static final int notificacoes_txt_view=0x7f0d0002;
+    }
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int course_list_item=0x7f030001;
         public static final int course_list_screen=0x7f030002;
+        public static final int login_screen=0x7f030003;
+        public static final int main_screen=0x7f030004;
+        public static final int settings_list_item=0x7f030005;
+        public static final int settings_screen=0x7f030006;
+        public static final int splash_screen=0x7f030007;
     }
     public static final class menu {
         public static final int activity_main=0x7f070000;
@@ -78,9 +113,37 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f050000;
+        public static final int atualizacao=0x7f050018;
+        public static final int atualizacao_subtitle=0x7f050019;
+        public static final int configuracoes=0x7f050009;
+        /**  Main Screen 
+         */
+        public static final int cursos=0x7f050008;
+        public static final int datas_de_atividades=0x7f05000f;
+        public static final int datas_de_atividades_sub=0x7f050010;
+        public static final int entrar=0x7f050007;
+        /**  Settings Screen 
+         */
+        public static final int geral=0x7f05000a;
         public static final int hello_world=0x7f050001;
+        public static final int login=0x7f050005;
+        public static final int mensagens_do_prof=0x7f050014;
+        public static final int mensagens_do_prof_subtitle=0x7f050015;
         public static final int menu_settings=0x7f050002;
+        public static final int notificacoes=0x7f050011;
+        public static final int novas_atividades=0x7f050012;
+        public static final int novas_atividades_subtitle=0x7f050013;
+        public static final int novos_materiais=0x7f050016;
+        public static final int novos_materiais_subtitle=0x7f050017;
+        public static final int senha=0x7f050006;
         public static final int title_activity_main=0x7f050003;
+        /**  Login Screen 
+         */
+        public static final int url_moodle=0x7f050004;
+        public static final int url_padrao=0x7f05000b;
+        public static final int url_subtitle=0x7f05000d;
+        public static final int usuario_padrao=0x7f05000c;
+        public static final int usuario_subtitle=0x7f05000e;
     }
     public static final class style {
         public static final int AppTheme=0x7f060000;

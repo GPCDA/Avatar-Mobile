@@ -25,7 +25,7 @@ public class CourseListActivity extends Activity implements OnClickListener, OnI
 		data[2] = new Course("Curso 3", 3, 3);
 		CourseListAdapter adapter = new CourseListAdapter(this, R.layout.course_list_item, data);
 
-		courseList = (ListView) findViewById(R.id.courseListView);
+		courseList = (ListView) findViewById(R.idCourseListScreen.courseListView);
 		courseList.setAdapter(adapter);
 		courseList.setOnItemClickListener(this);
 

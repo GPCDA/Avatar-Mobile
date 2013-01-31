@@ -5,4 +5,32 @@
     <string name="menu_settings">Settings</string>
     <string name="title_activity_main">MainActivity</string>
 
+    <!-- Login Screen -->
+    <string name="url_moodle">URL Moodle</string>
+    <string name="login">Login</string>
+    <string name="senha">Senha</string>
+    <string name="entrar">Entrar</string>
+
+    <!-- Main Screen -->
+    <string name="cursos">Cursos</string>
+    <string name="configuracoes">Configurações</string>
+
+    <!-- Settings Screen -->
+    <string name="geral">Geral</string>
+    <string name="url_padrao">URL Padrão</string>
+    <string name="usuario_padrao">Usuário Padrão</string>
+    <string name="url_subtitle">URL da instituição de ensino</string>
+    <string name="usuario_subtitle">Login e senha padrão</string>
+    <string name="datas_de_atividades">Datas de atividades</string>
+    <string name="datas_de_atividades_sub">Configure mensangens sobre datas de atividades</string>
+    <string name="notificacoes">Notificações</string>
+    <string name="novas_atividades">Novas Atividades</string>
+    <string name="novas_atividades_subtitle">Configure o recebimento de novas atividades</string>
+    <string name="mensagens_do_prof">Mensagens do professor</string>
+    <string name="mensagens_do_prof_subtitle">Configure o recebimento de mensagens</string>
+    <string name="novos_materiais">Novos Materiais</string>
+    <string name="novos_materiais_subtitle">Configure alerta de novos materiais</string>
+    <string name="atualizacao">Atualização do App</string>
+    <string name="atualizacao_subtitle">Configure a atualização da app</string>
+
 </resources>
