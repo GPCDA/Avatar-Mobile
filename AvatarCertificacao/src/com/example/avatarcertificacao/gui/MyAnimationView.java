@@ -2,30 +2,28 @@ package com.example.avatarcertificacao.gui;
 
 import java.util.ArrayList;
 
-import com.example.avatarcertificacao.model.Visema;
-import com.example.avatarcertificacao.util.Util;
-
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
+import com.example.avatarcertificacao.data.MessageController;
+import com.example.avatarcertificacao.model.Message;
+import com.example.avatarcertificacao.model.Visema;
+import com.example.avatarcertificacao.util.Util;
+
 public class MyAnimationView extends ImageView {
 	private static final String TAG = "AnimationTest:AnimationView";
-	private Context mContext = null;
 
 	private boolean mIsPlaying = false;
 	private boolean mStartPlaying = false;
+	private Context mContext = null;
 
-	private ArrayList<Visema> mLexemaList;
+	private ArrayList<Visema> mVisemaList;
 
 	private int play_frame = 0;
 	private long last_tick = 0;
-
-	private int genero;
 
 	public MyAnimationView(Context context, AttributeSet attrs) {
 		super(context, attrs);
@@ -45,14 +43,17 @@ public class MyAnimationView extends ImageView {
 		//			delay += 50;
 		//			mLexemaList.add(lexema);
 		//		}
-		if (mLexemaList != null) {
-			mLexemaList.clear();
+		if (mVisemaList != null) {
+			mVisemaList.clear();
 		}
-		if (genero == Util.MASCULINO) {
+		/*if (genero == Util.MASCULINO) {
 			mLexemaList = Util.loadList(this.getContext(), "masculino.txt");
 		} else {
 			mLexemaList = Util.loadList(this.getContext(), "feminino.txt");
-		}
+		}*/
+		Message msg = MessageController.getInstance(getContext()).getSelectedMessage();
+
+		mVisemaList = Util.createVisemaList(this.getContext(), msg.getMsgVisema(), msg.getAvatarId());
 	}
 
 	@Override
@@ -70,23 +71,25 @@ public class MyAnimationView extends ImageView {
 	}
 
 	private void drawBitmap(Canvas c) {
-		if (play_frame >= mLexemaList.size()) {
+		if (play_frame >= mVisemaList.size()) {
 			mIsPlaying = false;
 		} else {
 			long time = (System.currentTimeMillis() - last_tick);
 			int draw_x = 0;
 			int draw_y = 0;
-			if (time >= mLexemaList.get(play_frame).getDelay()) //the delay time has passed. set next frame
-			{
-				System.out.println("delay:" + mLexemaList.get(play_frame).getDelay());
-				last_tick = System.currentTimeMillis();
-				c.drawBitmap(mLexemaList.get(play_frame).getImage(), draw_x, draw_y, null);
-				play_frame++;
-				postInvalidate();
-			} else //still within delay.  redraw current frame
-			{
-				c.drawBitmap(mLexemaList.get(play_frame).getImage(), draw_x, draw_y, null);
-				postInvalidate();
+			if (mVisemaList.get(play_frame) != null) {
+				if (time >= mVisemaList.get(play_frame).getDelay()) //the delay time has passed. set next frame
+				{
+					System.out.println("delay:" + mVisemaList.get(play_frame).getDelay());
+					last_tick = System.currentTimeMillis();
+					c.drawBitmap(mVisemaList.get(play_frame).getImage(), draw_x, draw_y, null);
+					play_frame++;
+					postInvalidate();
+				} else //still within delay.  redraw current frame
+				{
+					c.drawBitmap(mVisemaList.get(play_frame).getImage(), draw_x, draw_y, null);
+					postInvalidate();
+				}
 			}
 		}
 	}

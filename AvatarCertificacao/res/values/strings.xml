@@ -32,5 +32,8 @@
     <string name="novos_materiais_subtitle">Configure alerta de novos materiais</string>
     <string name="atualizacao">Atualização do App</string>
     <string name="atualizacao_subtitle">Configure a atualização da app</string>
+    
+    <!-- Course list Screen -->
+    <string name="meus_cursos">Meus cursos</string>
 
 </resources>

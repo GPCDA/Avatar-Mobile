@@ -2,10 +2,11 @@
     package="com.example.avatarcertificacao"
     android:versionCode="1"
     android:versionName="1.0" >
-
+	
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="15" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:icon="@drawable/ic_launcher"
@@ -20,11 +21,11 @@
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".gui.MainScreenScreen"
+            android:name=".gui.MainScreen"
             android:label="@string/title_activity_main" >
         </activity>
         <activity
-            android:name=".gui.CourseListActivitytivity"
+            android:name=".gui.CourseListActivity"
             android:label="@string/title_activity_main" >
         </activity>
          <activity

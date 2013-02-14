@@ -5,10 +5,39 @@
     android:orientation="vertical"
     android:paddingBottom="20dp" >
 
+    <LinearLayout
+        android:id="@+idCourseListScreen/titleLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:padding="10dp"
+        android:orientation="horizontal" >
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logovocallab" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:text="@string/meus_cursos" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+idCourseListScreen/separator"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+idCourseListScreen/titleLayout"
+        android:background="@android:color/black" >
+    </LinearLayout>
+
     <ListView
         android:id="@+idCourseListScreen/courseListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@+idCourseListScreen/separator"
         android:divider="@android:color/black"
         android:dividerHeight="1dp" >
     </ListView>

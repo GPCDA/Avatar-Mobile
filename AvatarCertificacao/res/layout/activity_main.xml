@@ -6,45 +6,83 @@
     android:paddingBottom="20dp" >
 
     <LinearLayout
+        android:id="@+id/separatorTop"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/black" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/titleLayout"
+        android:background="@android:color/black" >
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/titleLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/separatorTop"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp" >
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:src="@drawable/logovocallab" />
+
+        <TextView
+            android:id="@+id/courseNameTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="55dp"
+            android:text="@string/meus_cursos" />
+    </LinearLayout>
+
+    <LinearLayout
         android:id="@+id/btn_container"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_alignParentBottom="true" >
-		<Button
+        android:orientation="horizontal" >
+
+        <Button
             android:id="@+id/prev_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@android:drawable/ic_media_previous"
             android:text="PREV" />
+
         <Button
             android:id="@+id/play_pause_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@android:drawable/ic_media_play"
             android:text="PLAY" />
-        
-         <Button
+
+        <Button
             android:id="@+id/stop_button"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:drawableTop="@drawable/tick_background"
             android:text="STOP" />
-         
-         <Button
+
+        <Button
             android:id="@+id/next_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@android:drawable/ic_media_next"
             android:text="NEXT" />
-        
     </LinearLayout>
 
-    <com.example.avatarcertificacao.MyAnimationView
+    <com.example.avatarcertificacao.gui.MyAnimationView
         android:id="@+id/anim_view"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_centerInParent="true" />
 
 </RelativeLayout>
