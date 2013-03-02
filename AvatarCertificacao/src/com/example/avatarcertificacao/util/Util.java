@@ -4,8 +4,22 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.CookieStore;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.BasicCookieStore;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
 import android.graphics.drawable.BitmapDrawable;
@@ -114,6 +128,50 @@ public class Util {
 
 		return sb.toString();
 	}
+	
+	public static String login(String url, String username, String password) {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("json", "token"));
+		params.add(new BasicNameValuePair("username", username));
+		params.add(new BasicNameValuePair("password", password));
+		return loadUrl(url, params);
+	}
+	
+	public static String loadUrl(String url, List<NameValuePair> params) {
+		DefaultHttpClient client = new DefaultHttpClient();
+		HttpPost httpPost = new HttpPost(url);
+		HttpResponse response;
+		int statusCode;
+		try {
+			httpPost.setEntity(new UrlEncodedFormEntity(params));
+			response = client.execute(httpPost);
+			if (response.getStatusLine().getStatusCode() == 200) {
+				return streamToString(response.getEntity().getContent());
+			} else {
+				return "Error:"+response.getStatusLine().getStatusCode();
+			}
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "Error:HTTP";
+	}
+	public static String streamToString(InputStream is) throws IOException {
+
+		BufferedReader r = new BufferedReader(new InputStreamReader(is));
+
+		StringBuilder total = new StringBuilder();
+		String line;
+		while ((line = r.readLine()) != null) {
+			total.append(line);
+		}
+
+		return total.toString();
+	}
+	
 	//  public void createNotification(){
 	//	// Prepare intent which is triggered if the
 	//    // notification is selected

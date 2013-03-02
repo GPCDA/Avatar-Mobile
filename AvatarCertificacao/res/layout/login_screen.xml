@@ -1,71 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@android:color/white"
+    android:background="@drawable/background"
+    android:gravity="center"
+    android:orientation="vertical"
     android:padding="20dp" >
 
     <ImageView
-        android:layout_width="fill_parent"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/logovocallab" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:contentDescription="@null"
+        android:src="@drawable/logo_vocallab" />
 
-    <LinearLayout
-        android:id="@+idLoginScreen/first_form_item"
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+idLoginScreen/second_form_item"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical" >
+        android:text="@string/url_moodle" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/url_moodle" />
+    <EditText
+        android:id="@+idLoginScreen/url_moodle_edit_text"
+        android:layout_width="fill_parent"
+        android:inputType="textUri"
+        android:text="http://www.vocallab.com.br/ead/"
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10dp"/>
 
-        <EditText
-            android:id="@+idLoginScreen/url_moodle_edit_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+idLoginScreen/second_form_item"
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginBottom="10dp"
-        android:orientation="vertical" >
+        android:text="@string/login" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login" />
+    <EditText
+        android:id="@+idLoginScreen/login_edit_text"
+        android:layout_width="fill_parent"
+        android:inputType="textEmailAddress"
+        android:layout_height="wrap_content" 
+        android:text="admin"
+        android:layout_marginBottom="10dp"/>
 
-        <EditText
-            android:id="@+idLoginScreen/login_edit_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+idLoginScreen/third_form_item"
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+idLoginScreen/second_form_item"
-        android:orientation="vertical" >
+        android:text="@string/senha" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/senha" />
-
-        <EditText
-            android:id="@+idLoginScreen/senha_edit_text"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
+    <EditText
+        android:id="@+idLoginScreen/senha_edit_text"
+        android:inputType="textPassword"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:text="-Admin123-"
+        android:layout_marginBottom="10dp"/>
 
     <LinearLayout
         android:id="@+idLoginScreen/fourth_form_item"
@@ -84,4 +70,4 @@
             android:text="@string/entrar" />
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
