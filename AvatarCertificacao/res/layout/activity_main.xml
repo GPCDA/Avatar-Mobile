@@ -79,10 +79,26 @@
             android:text="NEXT" />
     </LinearLayout>
 
-    <com.example.avatarcertificacao.gui.MyAnimationView
+    <FrameLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/senhor" >
+    </FrameLayout>
+
+   <!--  <com.example.avatarcertificacao.gui.MyAnimationView
         android:id="@+id/anim_view"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_centerInParent="true" />
+        android:layout_centerInParent="true"
+        android:background="@drawable/repouso"
+        android:src="@drawable/repouso" /> -->
+       <ImageView
+        android:id="@+id/anim_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerInParent="true"
+        android:background="@drawable/repouso"
+        android:src="@drawable/repouso" />
 
 </RelativeLayout>

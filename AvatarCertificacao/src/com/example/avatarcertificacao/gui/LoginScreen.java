@@ -100,6 +100,9 @@ public class LoginScreen extends Activity implements OnClickListener {
 				@Override
 				protected void onPostExecute(Void param) {
 					dismissDialog();
+					Intent intent = new Intent(LoginScreen.this, MainScreen.class);
+					startActivity(intent);
+					
 				}
  
 				

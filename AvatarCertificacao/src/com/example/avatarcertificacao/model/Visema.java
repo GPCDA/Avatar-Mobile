@@ -4,24 +4,30 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 public class Visema {
-	private float delay;
+	private long delay;
 	private Bitmap img;
 	private String fileName;
 
-	public Visema(float delay, Bitmap idImage) {
+	public Visema(long delay, Bitmap idImage) {
 		super();
 		this.delay = delay;
 		this.img = idImage;
 	}
 	
-	public Visema(float delay, String fileName,Bitmap img) {
+	public Visema(long delay, String fileName,Bitmap img) {
 		super();
 		this.delay = delay;
 		this.fileName = fileName;
 		this.img = img;
 	}
 	
-	public float getDelay() {
+	public Visema(long delay, String fileName) {
+		super();
+		this.delay = delay;
+		this.fileName = fileName;
+	}
+	
+	public long getDelay() {
 		return delay;
 	}
 

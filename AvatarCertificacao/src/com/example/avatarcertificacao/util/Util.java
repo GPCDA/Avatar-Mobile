@@ -9,51 +9,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.CookieStore;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 
 import com.example.avatarcertificacao.model.Visema;
-import com.google.gson.Gson;
 
 public class Util {
 	public static final int FEMININO = 8;
 	public static final int MASCULINO = 2;
 
-	public static ArrayList<Visema> loadList(Context context, String fileName) {
+	public static String loadList(Context context, String fileName) {
 		ArrayList<Visema> mList = new ArrayList<Visema>();
+		StringBuilder builder = new StringBuilder();
 		try {
 			Scanner scanner = new Scanner(context.getAssets().open(fileName));
 			while (scanner.hasNextLine()) {
-				mList.add(processLine(context, scanner.nextLine(), 1));
+				builder.append(scanner.nextLine());
+				//mList.add(processLine(context, scanner.nextLine(), 1));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return mList;
+		return builder.toString();
 	}
 
 	public static ArrayList<Visema> createVisemaList(Context context, String visemaList, int avatarId) {
 		ArrayList<Visema> mList = new ArrayList<Visema>();
 		Scanner scanner = new Scanner(visemaList);
-		while (scanner.hasNextLine()) {
-			mList.add(processLine(context, scanner.nextLine(), avatarId));
-		}
+		//		mList.add(processLine(context, scanner.nextLine(), avatarId));
+		//		while (scanner.hasNextLine()) {
+		//			mList.add(processLine(context, scanner.nextLine(), avatarId));
+		//		}
 
-		return mList;
+		return temp(context, scanner.nextLine(), avatarId);
 	}
 
 	protected static Visema processLine(Context context, String aLine, int avatarId) {
@@ -77,25 +76,67 @@ public class Util {
 
 	}
 
+	protected static ArrayList<Visema> temp(Context context, String aLine, int avatarId) {
+		ArrayList<Visema> mList = new ArrayList<Visema>();
+		String startTick = "";
+		String endTick = "";
+		String filename = "";
+
+		Scanner scanner = new Scanner(aLine);
+
+		while (scanner.hasNext()) {
+			startTick = scanner.next();
+			scanner.useDelimiter(" ");
+			if (scanner.hasNext()) {
+				endTick = scanner.next();
+				filename = scanner.next();
+				mList.add(createVisemaListItem(context, startTick, endTick, filename, avatarId));
+			}
+
+		}
+		return mList;
+	}
+
 	private static Visema createVisemaListItem(Context context, String startTick, String endTick, String filename, int avatarId) {
 		
-		
-		if(endTick.equals("") || startTick.equals("") || filename.equals("")){
+		if (endTick.equals("") || startTick.equals("") || filename.equals("")) {
 			return null;
 		}
-		float delay = Float.parseFloat(endTick) - Float.parseFloat(startTick);
+		System.out.println(startTick + "\t" + endTick + "\t" + filename);
+		
+		double delay = Double.parseDouble(endTick) - Double.parseDouble(startTick);
+		long delayInMilis= (long) Math.floor(delay);
 		filename = filename.substring(0, filename.indexOf("."));
 		filename = getLocalFileName(filename, avatarId);
 		String uri = "drawable/" + filename;
 		int id = context.getResources().getIdentifier(uri, null, context.getPackageName());
-		System.out.println("filename "+ filename);
-		BitmapDrawable d = (BitmapDrawable) context.getResources().getDrawable(id);
-		Visema lex = new Visema(delay, filename, d.getBitmap());
+		//System.out.println("filename " + filename);
+//		BitmapDrawable d = (BitmapDrawable) context.getResources().getDrawable(id);
+//		Visema lex = new Visema(delay, filename, d.getBitmap());
 		
-		System.out.println("delay" + delay);
+		Visema lex = new Visema(delayInMilis, filename);
 		
+		//System.out.println("delay" + delay);
+		
+		
+//		Bitmap bm = d.getBitmap();
+//
+//		if (bm != null) {
+//			bm.recycle();
+//			try {
+//				Thread.sleep(10);
+//			} catch (Exception e) {
+//			}
+//			bm = null;
+//			
+//			try {
+//				Thread.sleep(10);
+//			} catch (Exception e) {
+//			}
+//		}
+
 		return lex;
-		
+
 	}
 
 	private static String getLocalFileName(String filename, int avatarId) {
@@ -128,7 +169,7 @@ public class Util {
 
 		return sb.toString();
 	}
-	
+
 	public static String login(String url, String username, String password) {
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("json", "token"));
@@ -136,7 +177,7 @@ public class Util {
 		params.add(new BasicNameValuePair("password", password));
 		return loadUrl(url, params);
 	}
-	
+
 	public static String loadUrl(String url, List<NameValuePair> params) {
 		DefaultHttpClient client = new DefaultHttpClient();
 		HttpPost httpPost = new HttpPost(url);
@@ -148,7 +189,7 @@ public class Util {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				return streamToString(response.getEntity().getContent());
 			} else {
-				return "Error:"+response.getStatusLine().getStatusCode();
+				return "Error:" + response.getStatusLine().getStatusCode();
 			}
 		} catch (ClientProtocolException e) {
 			e.printStackTrace();
@@ -159,6 +200,7 @@ public class Util {
 		}
 		return "Error:HTTP";
 	}
+
 	public static String streamToString(InputStream is) throws IOException {
 
 		BufferedReader r = new BufferedReader(new InputStreamReader(is));
@@ -171,7 +213,7 @@ public class Util {
 
 		return total.toString();
 	}
-	
+
 	//  public void createNotification(){
 	//	// Prepare intent which is triggered if the
 	//    // notification is selected
