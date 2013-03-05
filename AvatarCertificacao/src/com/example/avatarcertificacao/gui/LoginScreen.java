@@ -7,6 +7,7 @@ import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.R.idLoginScreen;
 import com.example.avatarcertificacao.R.layout;
 import com.example.avatarcertificacao.R.menu;
+import com.example.avatarcertificacao.util.SessionStore;
 import com.example.avatarcertificacao.util.Util;
 
 import android.app.Activity;
@@ -19,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginScreen extends Activity implements OnClickListener {
 	
@@ -26,6 +28,7 @@ public class LoginScreen extends Activity implements OnClickListener {
 	private EditText moodleUrlEditText;
 	private EditText usernameEditText;
 	private EditText passwordEditText;
+	private Toast toast;
 	
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,15 @@ public class LoginScreen extends Activity implements OnClickListener {
         usernameEditText = (EditText) findViewById(R.idLoginScreen.login_edit_text);
         passwordEditText = (EditText) findViewById(R.idLoginScreen.senha_edit_text);
         
+        if (SessionStore.getUserToken(this).isEmpty()) {
+        	//PEDIR PARA LOGAR
+        } else {
+        	//PASSAR DIRETO PELO LOGIN
+        }
+        
         btnLogin.setOnClickListener(this);
+		toast = Toast.makeText(this, R.string.app_name,Toast.LENGTH_LONG);
+
     }
 
     @Override
@@ -68,10 +79,12 @@ public class LoginScreen extends Activity implements OnClickListener {
 				String url;
 				String username;
 				String password;
+				boolean loggedIn;
 				
 				@Override
 				protected void onPreExecute() {
 					showDialog();
+					loggedIn = false; 
 					if (moodleUrlEditText.getText().toString().endsWith(getString(R.string.bar))) {
 						url = moodleUrlEditText.getText().toString()+getString(R.string.WSUrl);
 					} else {
@@ -88,9 +101,12 @@ public class LoginScreen extends Activity implements OnClickListener {
 					JSONObject rootObject;
 					try {
 						rootObject = new JSONObject(response);
+						if (rootObject.getString(getString(R.string.token)) != null) {
+							loggedIn = true;
+							SessionStore.save(LoginScreen.this, rootObject.getString(getString(R.string.token)), rootObject.getLong(getString(R.string.expiration)));
+							SessionStore.save(LoginScreen.this, username, password, url);
+						}
 						//{"tk":"c8a5c5b3d969bbd44c479e8527f77fc5","exp":1364715508}
-//						acessToken = rootObject.getString(getString(R.string.token));
-//						expiration = rootObject.getLong(getString(R.string.expiration));
 					} catch (JSONException e) {
 						e.printStackTrace();
 					}
@@ -100,14 +116,15 @@ public class LoginScreen extends Activity implements OnClickListener {
 				@Override
 				protected void onPostExecute(Void param) {
 					dismissDialog();
-					Intent intent = new Intent(LoginScreen.this, MainScreen.class);
-					startActivity(intent);
-					
+					if (loggedIn) {
+						Intent intent = new Intent(LoginScreen.this, MainScreen.class);
+						startActivity(intent);
+					} else {
+						toast.show();
+					}
 				}
- 
 				
 			}.execute();
-			
 			
 		}
 		
