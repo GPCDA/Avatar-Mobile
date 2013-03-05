@@ -40,9 +40,7 @@ public class LoginScreen extends Activity implements OnClickListener {
         usernameEditText = (EditText) findViewById(R.idLoginScreen.login_edit_text);
         passwordEditText = (EditText) findViewById(R.idLoginScreen.senha_edit_text);
         
-        if (SessionStore.getUserToken(this).isEmpty()) {
-        	//PEDIR PARA LOGAR
-        } else {
+        if (!SessionStore.getUserToken(this).isEmpty()) {
         	//PASSAR DIRETO PELO LOGIN
         }
         
