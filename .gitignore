@@ -1,4 +1,4 @@
 *.apk
 *.ap_
-bin/*
-*.class
+AvatarCertificacao/bin/*
+AvatarCertificacao/gen/*
