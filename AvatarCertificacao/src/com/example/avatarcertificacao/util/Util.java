@@ -25,8 +25,8 @@ import android.graphics.drawable.BitmapDrawable;
 import com.example.avatarcertificacao.model.Visema;
 
 public class Util {
-	public static final int FEMININO = 8;
-	public static final int MASCULINO = 2;
+	public static final String FEMININO = "8";
+	public static final String MASCULINO = "2";
 
 	public static String loadList(Context context, String fileName) {
 		ArrayList<Visema> mList = new ArrayList<Visema>();
@@ -45,7 +45,7 @@ public class Util {
 		return builder.toString();
 	}
 
-	public static ArrayList<Visema> createVisemaList(Context context, String visemaList, int avatarId) {
+	public static ArrayList<Visema> createVisemaList(Context context, String visemaList, String avatarId) {
 		ArrayList<Visema> mList = new ArrayList<Visema>();
 		Scanner scanner = new Scanner(visemaList);
 		//		mList.add(processLine(context, scanner.nextLine(), avatarId));
@@ -56,7 +56,7 @@ public class Util {
 		return temp(context, scanner.nextLine(), avatarId);
 	}
 
-	protected static Visema processLine(Context context, String aLine, int avatarId) {
+	protected static Visema processLine(Context context, String aLine, String avatarId) {
 		String startTick = "";
 		String endTick = "";
 		String filename = "";
@@ -77,7 +77,7 @@ public class Util {
 
 	}
 
-	protected static ArrayList<Visema> temp(Context context, String aLine, int avatarId) {
+	protected static ArrayList<Visema> temp(Context context, String aLine, String avatarId) {
 		ArrayList<Visema> mList = new ArrayList<Visema>();
 		String startTick = "";
 		String endTick = "";
@@ -98,7 +98,7 @@ public class Util {
 		return mList;
 	}
 
-	private static Visema createVisemaListItem(Context context, String startTick, String endTick, String filename, int avatarId) {
+	private static Visema createVisemaListItem(Context context, String startTick, String endTick, String filename, String avatarId) {
 		
 		if (endTick.equals("") || startTick.equals("") || filename.equals("")) {
 			return null;
@@ -140,7 +140,7 @@ public class Util {
 
 	}
 
-	private static String getLocalFileName(String filename, int avatarId) {
+	private static String getLocalFileName(String filename, String avatarId) {
 		String prefix = "";
 		String localFileName = "";
 
@@ -176,6 +176,13 @@ public class Util {
 		params.add(new BasicNameValuePair("json", "token"));
 		params.add(new BasicNameValuePair("username", username));
 		params.add(new BasicNameValuePair("password", password));
+		return loadUrl(url, params);
+	}
+	
+	public static String loadMessages(String url, String token) {
+		List<NameValuePair> params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("json", "content"));
+		params.add(new BasicNameValuePair("token", token));
 		return loadUrl(url, params);
 	}
 

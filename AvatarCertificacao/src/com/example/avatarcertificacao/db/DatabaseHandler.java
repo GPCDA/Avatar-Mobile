@@ -45,7 +45,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	@Override
 	public void onCreate(SQLiteDatabase db) {
 		String CREATE_MESSAGES_TABLE = "CREATE TABLE " + TABLE_MESSAGES + "(" + KEY_ID + " INTEGER PRIMARY KEY, " + KEY_NAME + " TEXT, "
-				+ KEY_PERFIL + " TEXT, " + KEY_AVATAR + " INTEGER, " + KEY_IS_MSG_UPDATE + " INTEGER, " + KEY_MSG_AUDIO + " TEXT, "
+				+ KEY_PERFIL + " TEXT, " + KEY_AVATAR + " TEXT, " + KEY_IS_MSG_UPDATE + " INTEGER, " + KEY_MSG_AUDIO + " TEXT, "
 				+ KEY_MSG_VISEMA + " TEXT, " + KEY_IS_NOTIF_UPDATE + " INTEGER, " + KEY_NOTIF_N + " INTEGER, " + KEY_MSG_N + " INTEGER, "
 				+ KEY_NOTIF_AUDIO + " TEXT, " + KEY_NOTIF_VISEMA + " TEXT " + ")";
 
@@ -101,7 +101,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		int id = cursor.getInt(0);
 		String name = cursor.getString(1);
-		int avatar = cursor.getInt(2);
+		String avatar = cursor.getString(2);
 		int isMsgUpdate = cursor.getInt(3);
 		int isNotifUpdate = cursor.getInt(4);
 		String msgVisema = cursor.getString(5);
@@ -138,7 +138,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				msg.setId(Integer.parseInt(cursor.getString(0)));
 				msg.setName(cursor.getString(1));
 				msg.setPerfil(cursor.getString(2));
-				msg.setAvatarId(cursor.getInt(3));
+				msg.setAvatarId(cursor.getString(3));
 				msg.setMsgUpdate(cursor.getInt(4));
 				msg.setMsgAudio(cursor.getString(5));
 				msg.setMsgVisema(cursor.getString(6));

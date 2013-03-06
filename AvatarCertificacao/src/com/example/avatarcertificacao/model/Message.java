@@ -1,5 +1,8 @@
 package com.example.avatarcertificacao.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.content.Context;
 
 public class Message {
@@ -9,7 +12,7 @@ public class Message {
 	private int id;
 	private String name;
 	private String pf;
-	private int avt;
+	private String avt;
 	private int msgu;
 	private int notu;
 	private int msgn;
@@ -19,7 +22,39 @@ public class Message {
 	private String msgv;
 	private String notv;
 
-	public Message(int id, String name, String perfil, int avatarId, int isMsgUpdate, int isNotifUpdate, String msgAudio,
+	public Message(JSONObject obj) {
+		super();
+		try {
+			if (obj.getString("id").isEmpty()) {
+				this.id = 0;
+			} else {
+				this.id = obj.getInt("id");
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		try {
+			this.name = obj.getString("name");
+			this.pf = obj.getString("pf");
+			this.avt = obj.getString("avt");
+			this.msgu = obj.getInt("msgu");
+			this.notu = obj.getInt("notu");
+			this.msga = obj.getString("msga");
+			this.nota = obj.getString("nota");
+			this.msgv = obj.getString("msgv");
+			this.notv = obj.getString("notv");
+			this.notn = obj.getInt("notn");
+			this.msgn = obj.getInt("msgn");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	public Message(int id, String name, String perfil, String avatarId, int isMsgUpdate, int isNotifUpdate, String msgAudio,
 			String notifAudio, String msgVisema, String notifVisema, int msgn, int notn) {
 		super();
 		this.id = id;
@@ -60,11 +95,11 @@ public class Message {
 		this.pf = perfil;
 	}
 
-	public int getAvatarId() {
+	public String getAvatarId() {
 		return avt;
 	}
 
-	public void setAvatarId(int avatarId) {
+	public void setAvatarId(String avatarId) {
 		this.avt = avatarId;
 	}
 
@@ -134,6 +169,11 @@ public class Message {
 
 	public void setNotn(int notn) {
 		this.notn = notn;
+	}
+
+	public boolean isAdmin() {
+		// TODO Auto-generated method stub
+		return (id==0);
 	}
 
 }

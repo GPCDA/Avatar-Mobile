@@ -1,45 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:gravity="center"
-    android:paddingTop="5dp"
-    android:paddingBottom="5dp"
-    android:weightSum="3" >
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/courseTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/cursos"
+        android:textColor="#3e4095"
+        android:textSize="16sp"
+        android:textStyle="bold|italic" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1.5"
-        android:gravity="center" >
+        android:gravity="center_vertical"
+        android:orientation="vertical" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
-        <TextView
-            android:id="@+id/courseTextView"
+        <LinearLayout
+            android:id="@+id/warningLayoutContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Curso" />
-    </LinearLayout>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" >
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_weight="1.5"
-        android:gravity="center"
-        android:orientation="vertical" >
+            <ImageView
+                android:id="@+id/avisoIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/aviso_icon" />
 
-        <TextView
-            android:id="@+id/avisosTextView"
+            <TextView
+                android:id="@+id/avisosTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/aviso" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/messageLayoutContent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="avisos(1)" />
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" >
 
-        <TextView
-            android:id="@+id/mensagensTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="mensagens(1)" />
+            <ImageView
+                android:id="@+id/messageIcon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:src="@drawable/message_icon" />
+
+            <TextView
+                android:id="@+id/mensagensTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/msg" />
+        </LinearLayout>
     </LinearLayout>
 
 </LinearLayout>

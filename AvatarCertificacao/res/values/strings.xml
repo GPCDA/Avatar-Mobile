@@ -13,7 +13,7 @@
     
     <!-- All Screen -->
     <string name="empty"></string>
-    <string name="loading">Carregando</string>
+    <string name="loading">Carregando Mensagens e Notificações</string>
     
     <!-- Login Screen -->
     <string name="url_moodle">URL Moodle</string>
@@ -24,6 +24,9 @@
     
     <!-- Main Screen -->
     <string name="cursos">Cursos</string>
+    <string name="mensagem">Nenhuma Mensagem ou Noficação nova!</string>
+    <string name="mensagem_nova">Você possue novas mensagens ou noficicações!</string>
+    <string name="admin">Administrador</string>
     <string name="configuracoes">Configurações</string>
 
     <!-- Settings Screen -->
@@ -45,6 +48,10 @@
     <string name="atualizacao_subtitle">Configure a atualização da app</string>
     
     <!-- Course list Screen -->
+    <string name="fromteacher">Professor: %s</string>
+    <string name="aviso">Aviso</string>
+    <string name="msg">Mensagem</string>
     <string name="meus_cursos">Meus cursos</string>
-
+    <string name="clicktoplay">Toque no avatar para tocar</string>
+    
 </resources>

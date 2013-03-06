@@ -9,9 +9,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
+import android.os.AsyncTask;
 
+import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.db.DatabaseHandler;
+import com.example.avatarcertificacao.gui.MainScreen;
 import com.example.avatarcertificacao.model.Message;
+import com.example.avatarcertificacao.util.SessionStore;
 import com.example.avatarcertificacao.util.Util;
 import com.google.gson.Gson;
 
@@ -41,13 +45,14 @@ public class MessageController {
 			db = new DatabaseHandler(ctx);
 		}
 		this.msgList = db.getAllMessages();
-		if (this.msgList == null || this.msgList.isEmpty()) {
-			this.msgList = this.getMessages();
-			this.saveOnDB();
-		}
+//		if (this.msgList == null || this.msgList.isEmpty()) {
+//			this.msgList = this.downloadMessages();
+//			this.saveOnDB();
+//		}
 	}
 
-	private ArrayList<Message> getMessages() {
+	private ArrayList<Message> downloadMessages() {
+
 		ArrayList<Message> messageList = null;
 		try {
 			Gson gson = new Gson();
@@ -77,6 +82,31 @@ public class MessageController {
 		return messageList;
 	}
 
+	public void saveOnDB(String messageJson) {
+		ArrayList<Message> messageList = null;
+//		Gson gson = new Gson();
+		try {
+			if (!messageJson.isEmpty()) {
+				messageList = new ArrayList<Message>();
+	
+				JSONObject json = new JSONObject(messageJson);
+	
+				JSONArray jArray = json.getJSONArray("content");
+	
+				for (int i = 0; i < jArray.length(); i++) {
+					Message msg =  new Message(jArray.getJSONObject(i));
+					messageList.add(msg);
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		msgList = messageList;
+		for (Message current : msgList) {
+			db.addMessage(current);
+		}
+	}
+	
 	private void saveOnDB() {
 		for (Message current : msgList) {
 			db.addMessage(current);
@@ -113,5 +143,42 @@ public class MessageController {
 
 	public Message getSelectedMessage() {
 		return this.selectedMsg;
+	}
+
+	public boolean hasUnreadCourseMessages() {
+		for (Message message : msgList) {
+			if ((message.isMsgUpdate() || message.isNotifUpdate()) && !message.isAdmin()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean hasUnreadAdminMessages() {
+		for (Message message : msgList) {
+			if ((message.isMsgUpdate() || message.isNotifUpdate()) && message.isAdmin()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public ArrayList<Message> getCourseMessageList() {
+		ArrayList<Message> courseMessages = new ArrayList<Message>();
+		for (Message message : msgList) {
+			if (!message.isAdmin()) {
+				courseMessages.add(message);
+			}
+		}
+		return courseMessages;
+	}
+
+	public Message getMessage(int id) {
+		for (Message message : msgList) {
+			if (message.getId() == id) {
+				return message;
+			}
+		}
+		return null;
 	}
 }

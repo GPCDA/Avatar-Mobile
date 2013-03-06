@@ -61,6 +61,30 @@ public class SessionStore {
         }
     }
     
+    public static String getUsername(Context context) {
+        if (context.getSharedPreferences(KEY, Context.MODE_PRIVATE).contains(USERNAME)) {
+        	return context.getSharedPreferences(KEY, Context.MODE_PRIVATE).getString(USERNAME, "");
+        } else {
+        	return "";
+        }
+    }
+    
+    public static String getUrl(Context context) {
+        if (context.getSharedPreferences(KEY, Context.MODE_PRIVATE).contains(URL)) {
+        	return context.getSharedPreferences(KEY, Context.MODE_PRIVATE).getString(URL, "");
+        } else {
+        	return "";
+        }
+    }
+    
+    public static String getPassword(Context context) {
+        if (context.getSharedPreferences(KEY, Context.MODE_PRIVATE).contains(PASSWORD)) {
+        	return context.getSharedPreferences(KEY, Context.MODE_PRIVATE).getString(PASSWORD, "");
+        } else {
+        	return "";
+        }
+    }
+
     public static Long getExpirationData(Context context) {
         if (context.getSharedPreferences(KEY, Context.MODE_PRIVATE).contains(TOKEN)) {
         	return context.getSharedPreferences(KEY, Context.MODE_PRIVATE).getLong(EXPIRES,0);

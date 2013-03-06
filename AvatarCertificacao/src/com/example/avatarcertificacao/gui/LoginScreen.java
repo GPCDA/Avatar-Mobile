@@ -1,12 +1,11 @@
 package com.example.avatarcertificacao.gui;
 
+import java.util.Date;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.example.avatarcertificacao.R;
-import com.example.avatarcertificacao.R.idLoginScreen;
-import com.example.avatarcertificacao.R.layout;
-import com.example.avatarcertificacao.R.menu;
 import com.example.avatarcertificacao.util.SessionStore;
 import com.example.avatarcertificacao.util.Util;
 
@@ -39,9 +38,18 @@ public class LoginScreen extends Activity implements OnClickListener {
         moodleUrlEditText = (EditText) findViewById(R.idLoginScreen.url_moodle_edit_text);
         usernameEditText = (EditText) findViewById(R.idLoginScreen.login_edit_text);
         passwordEditText = (EditText) findViewById(R.idLoginScreen.senha_edit_text);
-        
+        Date today = new Date();
         if (!SessionStore.getUserToken(this).isEmpty()) {
-        	//PASSAR DIRETO PELO LOGIN
+        	if (SessionStore.getExpirationData(this) > today.getTime()) {
+				Intent intent = new Intent(LoginScreen.this, MainScreen.class);
+				startActivity(intent);
+				finish();
+        	} else {
+        		moodleUrlEditText.setText(SessionStore.getUrl(this));
+        		usernameEditText.setText(SessionStore.getUsername(this));
+        		passwordEditText.setText(SessionStore.getPassword(this));
+        		login();
+        	}
         }
         
         btnLogin.setOnClickListener(this);
@@ -117,6 +125,7 @@ public class LoginScreen extends Activity implements OnClickListener {
 					if (loggedIn) {
 						Intent intent = new Intent(LoginScreen.this, MainScreen.class);
 						startActivity(intent);
+						finish();
 					} else {
 						toast.show();
 					}
@@ -125,10 +134,6 @@ public class LoginScreen extends Activity implements OnClickListener {
 			}.execute();
 			
 		}
-		
-		
-//		Intent intent = new Intent(this, MainScreen.class);
-//		startActivity(intent);
 	}
 	
 	ProgressDialog progressDialog;

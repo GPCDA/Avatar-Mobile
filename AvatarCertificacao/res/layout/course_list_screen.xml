@@ -1,45 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
-    android:paddingBottom="20dp" >
+    android:gravity="center_horizontal"
+    android:background="@drawable/background"
+    android:orientation="vertical" >
 
-    <LinearLayout
-        android:id="@+idCourseListScreen/titleLayout"
+    <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:padding="10dp"
-        android:orientation="horizontal" >
+        android:contentDescription="@null"
+        android:layout_margin="10dp"
+        android:src="@drawable/logo_vocallab" />
 
-        <ImageView
-            android:layout_width="80dp"
-            android:layout_height="50dp"
-            android:src="@drawable/logovocallab" />
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:text="@string/meus_cursos" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+idCourseListScreen/separator"
+    <TextView
         android:layout_width="fill_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+idCourseListScreen/titleLayout"
-        android:background="@android:color/black" >
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textColor="#fff"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:padding="4dp"
+        android:background="#3e4095"
+        android:text="@string/meus_cursos" />
 
     <ListView
         android:id="@+idCourseListScreen/courseListView"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_below="@+idCourseListScreen/separator"
-        android:divider="@android:color/black"
+        android:divider="#a349"
         android:dividerHeight="1dp" >
     </ListView>
-
-</RelativeLayout>
+</LinearLayout>
