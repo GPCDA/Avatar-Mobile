@@ -15,30 +15,35 @@
         android:theme="@android:style/Theme.Light.NoTitleBar" >
         <activity
             android:name=".gui.LoginScreen"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".gui.MediaPlayerActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".gui.MainScreen"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".gui.CourseListActivity"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
         </activity>
          <activity
-            android:name=".gui.SettingsScreeningsScreen"
-            android:label="@string/title_activity_main" >
+            android:name=".gui.SettingsScreen"
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
         </activity>
         <activity
          android:name=".gui.SplashScreen"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

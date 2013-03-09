@@ -145,9 +145,27 @@ public class MessageController {
 		return this.selectedMsg;
 	}
 
+	public boolean hasCourseMessages() {
+		for (Message message : msgList) {
+			if (!message.isAdmin() && (!message.getMsgAudio().isEmpty() || !message.getNotifAudio().isEmpty())) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean hasAdmMessages() {
+		for (Message message : msgList) {
+			if (message.isAdmin() && !message.getMsgAudio().isEmpty()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public boolean hasUnreadCourseMessages() {
 		for (Message message : msgList) {
-			if ((message.isMsgUpdate() || message.isNotifUpdate()) && !message.isAdmin()) {
+			if ((message.isNewMessage() || message.isNewNotification()) && !message.isAdmin()) {
 				return true;
 			}
 		}
@@ -156,7 +174,7 @@ public class MessageController {
 
 	public boolean hasUnreadAdminMessages() {
 		for (Message message : msgList) {
-			if ((message.isMsgUpdate() || message.isNotifUpdate()) && message.isAdmin()) {
+			if ((message.isNewMessage() || message.isNewNotification()) && message.isAdmin()) {
 				return true;
 			}
 		}

@@ -49,7 +49,7 @@ public class SessionStore {
         Editor editor = context.getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
         editor.putString(USERNAME, username);
         editor.putString(PASSWORD, password);
-        editor.putString(URL, url);
+        editor.putString(URL, url.substring(0,url.indexOf(context.getString(R.string.WSUrl))));
 		return editor.commit();
     }
     
@@ -98,5 +98,13 @@ public class SessionStore {
         editor.clear();
         editor.commit();
     }
+
+	public static boolean logout(Context context) {
+        Editor editor = context.getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
+        editor.remove(TOKEN);
+        editor.remove(EXPIRES);
+        editor.remove(PASSWORD);
+        return editor.commit();
+	}
 
 }

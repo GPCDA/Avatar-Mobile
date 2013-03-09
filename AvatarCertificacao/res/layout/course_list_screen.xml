@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:contentDescription="@null"
         android:layout_margin="10dp"
-        android:src="@drawable/logo_vocallab" />
+        android:src="@drawable/logo_intern" />
 
     <TextView
         android:layout_width="fill_parent"

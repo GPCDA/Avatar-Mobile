@@ -14,7 +14,7 @@
         android:layout_marginBottom="20dp"
         android:layout_marginTop="20dp"
         android:contentDescription="@null"
-        android:src="@drawable/logo_vocallab" />
+        android:src="@drawable/logo_intern" />
 
     <LinearLayout
         android:id="@+idMainScreen/btn_courses"
@@ -39,7 +39,7 @@
         <LinearLayout
             android:id="@+idMainScreen/textContent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp" >
 
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="@string/mensagem" />
+                android:text="@string/course_message" />
         </LinearLayout>
     </LinearLayout>
 
@@ -86,7 +86,7 @@
         <LinearLayout
             android:id="@+idMainScreen/textContent"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="10dp" >
 
@@ -105,7 +105,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical"
-                android:text="@string/mensagem" />
+                android:text="@string/adm_message" />
         </LinearLayout>
     </LinearLayout>
 

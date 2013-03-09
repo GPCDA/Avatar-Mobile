@@ -1,7 +1,10 @@
 <resources>
 
     <string name="app_name">Vocallab Avatar Mobile</string>
-    <string name="menu_settings">Settings</string>
+    <string name="menu_settings">Configurações</string>
+    <string name="menu_logout">Sair</string>
+    <string name="logout_problem">Problema ao deslogar da aplicação</string>
+    
     <string name="title_activity_main">MainActivity</string>
     
     <!-- WS -->
@@ -9,7 +12,6 @@
     <string name="bar">/</string>
     <string name="token">tk</string>
 	<string name="expiration">exp</string>
-    
     
     <!-- All Screen -->
     <string name="empty"></string>
@@ -21,20 +23,30 @@
     <string name="senha">Senha</string>
     <string name="entrar">Entrar</string>
     <string name="logging">Logando</string>
+    <string name="login_erro">Url, Usuário ou Senha Incorretos.\nFavor tente novamente</string>
+    
     
     <!-- Main Screen -->
     <string name="cursos">Cursos</string>
-    <string name="mensagem">Nenhuma Mensagem ou Noficação nova!</string>
-    <string name="mensagem_nova">Você possue novas mensagens ou noficicações!</string>
+    <string name="course_no_message">Nenhuma Mensagem ou Noficação!</string>
+    <string name="course_message">Ultimas mensagens para você</string>
+    <string name="course_new_message">Existem novas mensagens ou noficicações para você!</string>
+    <string name="adm_no_message">Nenhuma Mensagem para você!</string>
+    <string name="adm_message">Ultima mensagem para você!</string>
+    <string name="adm_new_message">Existe uma nova mensagem para você!</string>
     <string name="admin">Administrador</string>
     <string name="configuracoes">Configurações</string>
-
+	<string name="no_messages">Não existe mensagem para você</string>
+    
     <!-- Settings Screen -->
     <string name="geral">Geral</string>
-    <string name="url_padrao">URL Padrão</string>
-    <string name="usuario_padrao">Usuário Padrão</string>
+    <string name="url_padrao">URL</string>
+    <string name="usuario_padrao">Usuário</string>
     <string name="url_subtitle">URL da instituição de ensino</string>
-    <string name="usuario_subtitle">Login e senha padrão</string>
+    <string name="usuario_subtitle">Usuário ativo</string>
+    <string name="erase">Apagar dados</string>
+    
+    <!-- Retirado do app -->
     <string name="datas_de_atividades">Datas de atividades</string>
     <string name="datas_de_atividades_sub">Configure mensangens sobre datas de atividades</string>
     <string name="notificacoes">Notificações</string>

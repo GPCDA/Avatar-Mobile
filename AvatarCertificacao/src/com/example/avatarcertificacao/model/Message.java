@@ -106,6 +106,13 @@ public class Message {
 	public boolean isMsgUpdate() {
 		return msgu == 1;
 	}
+	
+	public boolean isNewMessage() {
+		return msgn == 1;
+	}
+	public boolean isNewNotification() {
+		return notn == 1;
+	}
 
 	public void setMsgUpdate(int isMsgUpdate) {
 		this.msgu = isMsgUpdate;

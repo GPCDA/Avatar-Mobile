@@ -44,23 +44,21 @@ public class LoginScreen extends Activity implements OnClickListener {
 				Intent intent = new Intent(LoginScreen.this, MainScreen.class);
 				startActivity(intent);
 				finish();
-        	} else {
-        		moodleUrlEditText.setText(SessionStore.getUrl(this));
-        		usernameEditText.setText(SessionStore.getUsername(this));
-        		passwordEditText.setText(SessionStore.getPassword(this));
-        		login();
         	}
         }
         
+		moodleUrlEditText.setText(SessionStore.getUrl(this));
+		usernameEditText.setText(SessionStore.getUsername(this));
+		passwordEditText.setText(SessionStore.getPassword(this));
+		if (!(SessionStore.getUrl(this).isEmpty() || 
+			SessionStore.getUsername(this).isEmpty() || 
+			SessionStore.getPassword(this).isEmpty())) {
+    		login();
+		}
+        
         btnLogin.setOnClickListener(this);
-		toast = Toast.makeText(this, R.string.app_name,Toast.LENGTH_LONG);
+		toast = Toast.makeText(this, R.string.login_erro,Toast.LENGTH_LONG);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.activity_main, menu);
-        return true;
     }
 
 	@Override
@@ -95,6 +93,9 @@ public class LoginScreen extends Activity implements OnClickListener {
 						url = moodleUrlEditText.getText().toString()+getString(R.string.WSUrl);
 					} else {
 						url = moodleUrlEditText.getText().toString()+getString(R.string.bar)+getString(R.string.WSUrl);
+					}
+					if (!url.startsWith("http://")) {
+						url = "http://"+url;
 					}
 					username = usernameEditText.getText().toString();
 					password = passwordEditText.getText().toString();

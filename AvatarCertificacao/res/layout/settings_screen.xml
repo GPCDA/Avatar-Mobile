@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@android:color/white"
@@ -7,36 +7,108 @@
     android:paddingBottom="20dp" >
 
     <TextView
-        android:id="@+idSettingsScreen/geral_txt_view"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="2dp"
         android:background="@android:color/darker_gray"
-        android:text="@string/geral"
+        android:padding="5dp"
+        android:text="@string/menu_settings"
         android:textColor="@android:color/black" />
 
-    <ListView
-        android:id="@+idSettingsScreen/geral_list_view"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+idSettingsScreen/geral_txt_view" >
-    </ListView>
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="5dp" >
 
-    <TextView
-        android:id="@+idSettingsScreen/notificacoes_txt_view"
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/url_padrao"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/url_subtitle"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+idSettingsListItem/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textUri" >
+
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" >
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="2dp"
-        android:layout_below="@+idSettingsScreen/geral_list_view"
-        android:background="@android:color/darker_gray"
-        android:text="@string/notificacoes"
-        android:textColor="@android:color/black" />
+        android:layout_gravity="center_vertical"
+        android:orientation="vertical"
+        android:padding="5dp" >
 
-    <ListView
-        android:id="@+idSettingsScreen/notificacoes_list_view"
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/usuario_padrao"
+            android:textSize="18dp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/usuario_subtitle"
+            android:textSize="10dp" />
+
+        <EditText
+            android:id="@+idSettingsListItem/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textUri" >
+        </EditText>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray" >
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+idSettingsScreen/notificacoes_txt_view" >
-    </ListView>
+        android:orientation="horizontal"
+        android:gravity="center" 
+        android:padding="20dp">
 
-</RelativeLayout>
+        <Button
+            android:id="@+id/Button01"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_margin"
+            android:padding="10dp"
+            android:layout_marginRight="20dp"
+            android:text="@string/erase" />
+
+        <Button
+            android:id="@+idSettingsListItem/erase"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:background="@drawable/circle_margin"
+            android:padding="10dp"
+            android:text="@string/menu_logout" />
+    </LinearLayout>
+
+</LinearLayout>

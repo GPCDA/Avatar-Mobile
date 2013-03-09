@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
@@ -18,16 +19,20 @@ import android.os.Environment;
 import android.os.Handler;
 import android.util.Base64;
 import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.data.MessageController;
 import com.example.avatarcertificacao.model.Message;
 import com.example.avatarcertificacao.model.Visema;
+import com.example.avatarcertificacao.util.SessionStore;
 import com.example.avatarcertificacao.util.Util;
 
 public class MediaPlayerActivity extends Activity implements OnClickListener {
@@ -65,17 +70,21 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		type = extraBundle.getInt("type");
 		
 		message = MessageController.getInstance(this).getMessage(id);
-		courseTextView.setText(message.getName());
+		if (message.getName().isEmpty()) {
+			courseTextView.setText(R.string.admin);
+		} else {
+			courseTextView.setText(message.getName());
+		}
 		
 		new LoadImagesTask().execute();
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		getMenuInflater().inflate(R.menu.activity_main, menu);
+//		return true;
+//	}
 	
 	@Override
 	public void onPause() {
@@ -317,4 +326,36 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		return buffer;
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.menu.option_menu, menu);
+	    return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		Intent intent;
+		switch (item.getItemId()) {
+//		case R.optionMenu.settings:
+//			intent = new Intent(this, SettingsScreen.class);
+//			startActivity(intent);
+//			break;
+		case R.optionMenu.logout:
+			if (SessionStore.logout(this)) {
+				intent = new Intent(this, LoginScreen.class);
+				startActivity(intent);
+				finish();
+			} else {
+				Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
+			}
+			
+			break;
+
+		default:
+			break;
+		}
+		return false;
+		
+	}
 }
