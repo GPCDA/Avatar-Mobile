@@ -14,55 +14,66 @@
         android:contentDescription="@null"
         android:src="@drawable/logo_vocallab" />
 
-    <TextView
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/url_moodle" />
+        android:layout_height="wrap_content" >
 
-    <EditText
-        android:id="@+idLoginScreen/url_moodle_edit_text"
-        android:layout_width="fill_parent"
-        android:inputType="textUri"
-        android:layout_height="wrap_content" 
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/login" />
-
-    <EditText
-        android:id="@+idLoginScreen/login_edit_text"
-        android:layout_width="fill_parent"
-        android:inputType="textEmailAddress"
-        android:layout_height="wrap_content" 
-        android:layout_marginBottom="10dp"/>
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/senha" />
-
-    <EditText
-        android:id="@+idLoginScreen/senha_edit_text"
-        android:inputType="textPassword"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginBottom="10dp"/>
-
-    <LinearLayout
-        android:id="@+idLoginScreen/fourth_form_item"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <Button
-            android:id="@+idLoginScreen/login_btn"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:text="@string/entrar" />
-    </LinearLayout>
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/url_moodle" />
+
+            <EditText
+                android:id="@+idLoginScreen/url_moodle_edit_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="textUri" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login" />
+
+            <EditText
+                android:id="@+idLoginScreen/login_edit_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="textEmailAddress" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/senha" />
+
+            <EditText
+                android:id="@+idLoginScreen/senha_edit_text"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:inputType="textPassword" />
+
+            <LinearLayout
+                android:id="@+idLoginScreen/fourth_form_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <Button
+                    android:id="@+idLoginScreen/login_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="@string/entrar" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
