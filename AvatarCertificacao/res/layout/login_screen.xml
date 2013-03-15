@@ -23,6 +23,7 @@
         android:id="@+idLoginScreen/url_moodle_edit_text"
         android:layout_width="fill_parent"
         android:inputType="textUri"
+         android:text="http://www.vocallab.com.br/ead/"
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10dp"/>
 
@@ -35,6 +36,7 @@
         android:id="@+idLoginScreen/login_edit_text"
         android:layout_width="fill_parent"
         android:inputType="textEmailAddress"
+        android:text="admin"
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10dp"/>
 
@@ -47,6 +49,7 @@
         android:id="@+idLoginScreen/senha_edit_text"
         android:inputType="textPassword"
         android:layout_width="fill_parent"
+        android:text="-Admin123-"
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10dp"/>
 

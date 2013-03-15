@@ -16,11 +16,8 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 
 import com.example.avatarcertificacao.model.Visema;
 
@@ -47,6 +44,7 @@ public class Util {
 
 	public static ArrayList<Visema> createVisemaList(Context context, String visemaList, String avatarId) {
 		ArrayList<Visema> mList = new ArrayList<Visema>();
+		visemaList = visemaList.replace("\n", " ");
 		Scanner scanner = new Scanner(visemaList);
 		//		mList.add(processLine(context, scanner.nextLine(), avatarId));
 		//		while (scanner.hasNextLine()) {
@@ -115,7 +113,9 @@ public class Util {
 //		BitmapDrawable d = (BitmapDrawable) context.getResources().getDrawable(id);
 //		Visema lex = new Visema(delay, filename, d.getBitmap());
 		
-		Visema lex = new Visema(delayInMilis, filename);
+		//Visema lex = new Visema(delayInMilis, filename);
+		
+		Visema lex = new Visema(delayInMilis,filename, id);
 		
 		//System.out.println("delay" + delay);
 		

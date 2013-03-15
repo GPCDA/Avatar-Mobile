@@ -1,19 +1,23 @@
 package com.example.avatarcertificacao.model;
 
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 
 public class Visema {
 	private long delay;
 	private Bitmap img;
 	private String fileName;
+	private int id;
 
 	public Visema(long delay, Bitmap idImage) {
 		super();
 		this.delay = delay;
 		this.img = idImage;
 	}
-	
+	public Visema(long delay,String filename, int id) {
+		super();
+		this.delay = delay;
+		this.id = id;
+	}
 	public Visema(long delay, String fileName,Bitmap img) {
 		super();
 		this.delay = delay;
@@ -45,6 +49,14 @@ public class Visema {
 
 	public String getFileName() {
 		return fileName;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setFileName(String fileName) {

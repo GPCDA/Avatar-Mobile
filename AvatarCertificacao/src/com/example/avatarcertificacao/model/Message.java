@@ -3,11 +3,10 @@ package com.example.avatarcertificacao.model;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.content.Context;
-
 public class Message {
 
-	private static final long serialVersionUID = 1L;
+	public static final int MESSAGE = 0;
+	public static final int NOTIFICATION = 1;
 
 	private int id;
 	private String name;

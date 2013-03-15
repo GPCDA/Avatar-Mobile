@@ -39,6 +39,7 @@
             android:background="@drawable/repouso"
             android:contentDescription="@null"
             android:src="@drawable/repouso" />
+        
     </RelativeLayout>
 
     <ImageView

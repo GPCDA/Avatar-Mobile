@@ -5,10 +5,6 @@ import java.util.Date;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.avatarcertificacao.R;
-import com.example.avatarcertificacao.util.SessionStore;
-import com.example.avatarcertificacao.util.Util;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -20,6 +16,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.avatarcertificacao.R;
+import com.example.avatarcertificacao.util.SessionStore;
+import com.example.avatarcertificacao.util.Util;
 
 public class LoginScreen extends Activity implements OnClickListener {
 	

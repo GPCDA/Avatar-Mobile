@@ -9,12 +9,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
-import android.os.CountDownTimer;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.ImageView;
 
-import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.data.MessageController;
 import com.example.avatarcertificacao.model.Message;
 import com.example.avatarcertificacao.model.Visema;

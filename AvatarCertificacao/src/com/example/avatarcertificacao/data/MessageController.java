@@ -9,13 +9,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.os.AsyncTask;
 
-import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.db.DatabaseHandler;
-import com.example.avatarcertificacao.gui.MainScreen;
 import com.example.avatarcertificacao.model.Message;
-import com.example.avatarcertificacao.util.SessionStore;
 import com.example.avatarcertificacao.util.Util;
 import com.google.gson.Gson;
 

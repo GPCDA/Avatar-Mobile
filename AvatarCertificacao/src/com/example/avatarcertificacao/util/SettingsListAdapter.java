@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.avatarcertificacao.R;
-import com.example.avatarcertificacao.util.CourseListAdapter.CourseHolder;
 
 public class SettingsListAdapter extends ArrayAdapter<SettingsListItem> {
 

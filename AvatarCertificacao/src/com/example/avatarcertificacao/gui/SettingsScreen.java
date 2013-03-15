@@ -2,13 +2,6 @@ package com.example.avatarcertificacao.gui;
 
 import java.util.ArrayList;
 
-import com.example.avatarcertificacao.R;
-import com.example.avatarcertificacao.R.idSettingsScreen;
-import com.example.avatarcertificacao.R.layout;
-import com.example.avatarcertificacao.R.string;
-import com.example.avatarcertificacao.util.SettingsListAdapter;
-import com.example.avatarcertificacao.util.SettingsListItem;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +9,10 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.avatarcertificacao.R;
+import com.example.avatarcertificacao.util.SettingsListAdapter;
+import com.example.avatarcertificacao.util.SettingsListItem;
 
 public class SettingsScreen extends Activity implements OnItemClickListener {
 	private static final int GERAL = 0;

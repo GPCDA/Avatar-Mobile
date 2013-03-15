@@ -16,16 +16,7 @@
 
 package com.example.avatarcertificacao.util;
 
-import java.util.List;
-
-
-import org.apache.http.cookie.Cookie;
-import org.json.JSONObject;
-
-import com.example.avatarcertificacao.R;
-
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
 public class SessionStore {
