@@ -14,6 +14,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,11 +31,44 @@ import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.data.MessageController;
 import com.example.avatarcertificacao.model.Message;
 import com.example.avatarcertificacao.model.Visema;
-import com.example.avatarcertificacao.util.AnimationsContainer;
-import com.example.avatarcertificacao.util.AnimationsContainer.FramesSequenceAnimation;
 import com.example.avatarcertificacao.util.Util;
 
 public class MediaPlayerActivity extends Activity implements OnClickListener {
+
+	private ImageView a_;
+	private ImageView a;
+	private ImageView emai;
+	private ImageView emin;
+	private ImageView f1;
+	private ImageView f2;
+	private ImageView i1min;
+	private ImageView i2min;
+	private ImageView lmai;
+	private ImageView k1;
+	private ImageView k2;
+	private ImageView k3;
+	private ImageView l1mai;
+	private ImageView l1min;
+	private ImageView l2mai;
+	private ImageView l3mai;
+	private ImageView l3min;
+	private ImageView l4min;
+	private ImageView omai;
+	private ImageView omin;
+	private ImageView p1;
+	private ImageView p2;
+	private ImageView r1;
+	private ImageView r2;
+	private ImageView repouso;
+	private ImageView s1mai;
+	private ImageView s2mai;
+	private ImageView s2min;
+	private ImageView t1;
+	private ImageView t2;
+	private ImageView u;
+	private ImageView u_;
+
+	public ImageView currentImageView;
 
 	//MyAnimationView animationView;
 	MediaPlayer mp;
@@ -46,6 +80,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	ArrayList<byte[]> bufferedImgs;
 	public ImageView image;
 	public int count = 0;
+	private int current = 0;
 	AnimationDrawable teste;
 	private LruCache<Integer, Bitmap> mMemoryCache;
 
@@ -53,6 +88,9 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 	Message message;
 	int type;
+	private ImageView l2min;
+	private ImageView imai;
+	private ImageView s1min;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -77,9 +115,115 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 		loadAnimation();
 
+		//findImageViews();
+
 		//createBitmapList();
 
-		//new LoadImagesTask().execute();
+		new LoadImagesTask().execute();
+
+	}
+
+	private void findImageViews() {
+		repouso = (ImageView) findViewById(R.idImage.repouso);
+
+		a = (ImageView) findViewById(R.idImage.a);
+		a.setVisibility(View.GONE);
+
+		a_ = (ImageView) findViewById(R.idImage.a_);
+		a_.setVisibility(View.GONE);
+
+		emai = (ImageView) findViewById(R.idImage.emai);
+		emai.setVisibility(View.GONE);
+
+		emin = (ImageView) findViewById(R.idImage.emin);
+		emin.setVisibility(View.GONE);
+
+		f1 = (ImageView) findViewById(R.idImage.f1);
+		f1.setVisibility(View.GONE);
+
+		f2 = (ImageView) findViewById(R.idImage.f2);
+		f2.setVisibility(View.GONE);
+
+		i1min = (ImageView) findViewById(R.idImage.i1min);
+		i1min.setVisibility(View.GONE);
+
+		i2min = (ImageView) findViewById(R.idImage.i2min);
+		i2min.setVisibility(View.GONE);
+
+		imai = (ImageView) findViewById(R.idImage.imai);
+		imai.setVisibility(View.GONE);
+
+		k1 = (ImageView) findViewById(R.idImage.k1);
+		k1.setVisibility(View.GONE);
+
+		k2 = (ImageView) findViewById(R.idImage.k2);
+		k2.setVisibility(View.GONE);
+
+		k3 = (ImageView) findViewById(R.idImage.k3);
+		k3.setVisibility(View.GONE);
+
+		l1mai = (ImageView) findViewById(R.idImage.l1mai);
+		l1mai.setVisibility(View.GONE);
+
+		l1min = (ImageView) findViewById(R.idImage.l1min);
+		l1min.setVisibility(View.GONE);
+
+		l2min = (ImageView) findViewById(R.idImage.l2min);
+		l2min.setVisibility(View.GONE);
+
+		l3mai = (ImageView) findViewById(R.idImage.l3mai);
+		l3mai.setVisibility(View.GONE);
+
+		l3mai = (ImageView) findViewById(R.idImage.l3mai);
+		l3mai.setVisibility(View.GONE);
+
+		l3min = (ImageView) findViewById(R.idImage.l3min);
+		l3min.setVisibility(View.GONE);
+
+		l4min = (ImageView) findViewById(R.idImage.l4min);
+		l4min.setVisibility(View.GONE);
+
+		omai = (ImageView) findViewById(R.idImage.omai);
+		omai.setVisibility(View.GONE);
+
+		omin = (ImageView) findViewById(R.idImage.omin);
+		omin.setVisibility(View.GONE);
+
+		p1 = (ImageView) findViewById(R.idImage.p1);
+		p1.setVisibility(View.GONE);
+
+		p2 = (ImageView) findViewById(R.idImage.p2);
+		p2.setVisibility(View.GONE);
+
+		r1 = (ImageView) findViewById(R.idImage.r1);
+		r1.setVisibility(View.GONE);
+
+		r2 = (ImageView) findViewById(R.idImage.r2);
+		r2.setVisibility(View.GONE);
+
+		s1mai = (ImageView) findViewById(R.idImage.s1mai);
+		s1mai.setVisibility(View.GONE);
+
+		s1min = (ImageView) findViewById(R.idImage.s1min);
+		s1min.setVisibility(View.GONE);
+
+		s2mai = (ImageView) findViewById(R.idImage.s2mai);
+		s2mai.setVisibility(View.GONE);
+
+		s2min = (ImageView) findViewById(R.idImage.s2min);
+		s2min.setVisibility(View.GONE);
+
+		t1 = (ImageView) findViewById(R.idImage.t1);
+		t1.setVisibility(View.GONE);
+
+		t2 = (ImageView) findViewById(R.idImage.t2);
+		t2.setVisibility(View.GONE);
+
+		u = (ImageView) findViewById(R.idImage.u);
+		u.setVisibility(View.GONE);
+
+		u_ = (ImageView) findViewById(R.idImage.u_);
+		u_.setVisibility(View.GONE);
 
 	}
 
@@ -105,9 +249,9 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	}
 
 	private void playMedia(String genero) {
-		//dodraw();
-		FramesSequenceAnimation anim = AnimationsContainer.getInstance(this).createAvatarAnimation(image, mVisemaList);
-		anim.start();
+		dodraw();
+		//FramesSequenceAnimation anim = AnimationsContainer.getInstance(this).createAvatarAnimation(image, mVisemaList);
+		//anim.start();
 		//handler.post(animation);
 		//createAnimation();
 		this.playSound(genero);
@@ -116,22 +260,24 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	private void dodraw() {
 		// TODO Auto-generated method stub
 		this.runOnUiThread(new Runnable() {
-			private int current = 0;
+			
 			private Bitmap bm;
 
 			@Override
 			public void run() {
 				if (current < mVisemaList.size()) {
-					//					if (bm != null && !bm.isRecycled()) {
-					//						bm.recycle();
-					//						bm = null;
-					//						System.gc();
-					//					}
-					//					image.setDrawingCacheQuality(ImageView.DRAWING_CACHE_QUALITY_LOW);
-					//					bm = BitmapFactory.decodeByteArray(bufferedImgs.get(current), 0, bufferedImgs.get(current).length);
-					//					image.setImageBitmap(bm);
-					image.setImageBitmap(decodeSampledBitmapFromResource(getResources(), mVisemaList.get(current).getId(), 500, 500));
-					handler.postDelayed(this, mVisemaList.get(current).getDelay());
+					if (bm != null && !bm.isRecycled()) {
+						bm.recycle();
+						bm = null;
+						System.gc();
+					}
+					image.setDrawingCacheQuality(ImageView.DRAWING_CACHE_QUALITY_LOW);
+					bm = BitmapFactory.decodeByteArray(bufferedImgs.get(current), 0, bufferedImgs.get(current).length);
+					image.setImageBitmap(bm);
+					//					currentImageView.setVisibility(View.GONE);
+					//					mVisemaList.get(current).getImgView().setVisibility(View.VISIBLE);
+					//					currentImageView = mVisemaList.get(current).getImgView();
+					handler.postDelayed(this, mVisemaList.get(current).getDelay()-60);
 					current++;
 				}
 
@@ -224,6 +370,14 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			mp = mediaPlayer;
 
 			mediaPlayer.start();
+			mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+				
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					// TODO Auto-generated method stub
+					current = mVisemaList.size()-2;
+				}
+			});
 
 		} catch (IOException ex) {
 
@@ -282,10 +436,10 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			bufferedImgs = new ArrayList<byte[]>();
 
 			for (int i = 0; i < mVisemaList.size(); i++) {
-				filename = mVisemaList.get(i).getFileName();
-				uri = "drawable/" + filename;
-				id = MediaPlayerActivity.this.getResources().getIdentifier(uri, null, MediaPlayerActivity.this.getPackageName());
-				bufferedImgs.add(getBytesFromResource(id));
+//				filename = mVisemaList.get(i).getFileName();
+//				uri = "drawable/" + filename;
+//				id = MediaPlayerActivity.this.getResources().getIdentifier(uri, null, MediaPlayerActivity.this.getPackageName());
+				bufferedImgs.add(getBytesFromResource(mVisemaList.get(i).getId()));
 			}
 		}
 
@@ -324,6 +478,123 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			default:
 				break;
 		}
+
+		// setImagesViewsToVisemas();
+
+		//currentImageView = mVisemaList.get(0).getImgView();
+	}
+
+	private void setImagesViewsToVisemas() {
+		// TODO Auto-generated method stub
+		for (Visema visema : mVisemaList) {
+			switch (visema.getId()) {
+				case R.drawable.a:
+					visema.setImgView(a);
+					break;
+				case R.drawable.a_:
+					visema.setImgView(a_);
+					break;
+				case R.drawable.emai:
+					visema.setImgView(emai);
+					break;
+				case R.drawable.emin:
+					visema.setImgView(emin);
+					break;
+				case R.drawable.f1:
+					visema.setImgView(f1);
+					break;
+				case R.drawable.f2:
+					visema.setImgView(f2);
+					break;
+				case R.drawable.i1min:
+					visema.setImgView(i1min);
+					break;
+				case R.drawable.i2min:
+					visema.setImgView(i2min);
+					break;
+				case R.drawable.imai:
+					visema.setImgView(imai);
+					break;
+				case R.drawable.k1:
+					visema.setImgView(k1);
+					break;
+				case R.drawable.k2:
+					visema.setImgView(k2);
+					break;
+				case R.drawable.k3:
+					visema.setImgView(k3);
+					break;
+				case R.drawable.l1min:
+					visema.setImgView(l1min);
+					break;
+				case R.drawable.l1mai:
+					visema.setImgView(l1mai);
+					break;
+				case R.drawable.l2min:
+					visema.setImgView(l2min);
+					break;
+				case R.drawable.l2mai:
+					visema.setImgView(l2mai);
+					break;
+				case R.drawable.l3mai:
+					visema.setImgView(l3mai);
+					break;
+				case R.drawable.l3min:
+					visema.setImgView(l3min);
+					break;
+				case R.drawable.l4min:
+					visema.setImgView(l4min);
+					break;
+				case R.drawable.omai:
+					visema.setImgView(omai);
+					break;
+				case R.drawable.omin:
+					visema.setImgView(omin);
+					break;
+				case R.drawable.p1:
+					visema.setImgView(p1);
+					break;
+				case R.drawable.p2:
+					visema.setImgView(p2);
+					break;
+				case R.drawable.r1:
+					visema.setImgView(r1);
+					break;
+				case R.drawable.r2:
+					visema.setImgView(r2);
+					break;
+				case R.drawable.repouso:
+					visema.setImgView(repouso);
+					break;
+				case R.drawable.s1mai:
+					visema.setImgView(s1mai);
+					break;
+				case R.drawable.s2mai:
+					visema.setImgView(s2mai);
+					break;
+				case R.drawable.s1min:
+					visema.setImgView(s1min);
+					break;
+				case R.drawable.s2min:
+					visema.setImgView(s2min);
+					break;
+				case R.drawable.t1:
+					visema.setImgView(t1);
+					break;
+				case R.drawable.t2:
+					visema.setImgView(t2);
+					break;
+
+				case R.drawable.u:
+					visema.setImgView(u);
+					break;
+				case R.drawable.u_:
+					visema.setImgView(u_);
+					break;
+			}
+
+		}
+
 	}
 
 	public byte[] getBytesFromResource(final int res) {
