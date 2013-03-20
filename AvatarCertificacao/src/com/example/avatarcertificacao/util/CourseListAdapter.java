@@ -2,10 +2,6 @@ package com.example.avatarcertificacao.util;
 
 import java.util.ArrayList;
 
-import com.example.avatarcertificacao.R;
-import com.example.avatarcertificacao.gui.MediaPlayerActivity;
-import com.example.avatarcertificacao.model.Message;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +13,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.example.avatarcertificacao.R;
+import com.example.avatarcertificacao.gui.MediaPlayerActivity;
+import com.example.avatarcertificacao.model.Message;
 
 public class CourseListAdapter extends ArrayAdapter<Message> {
 
