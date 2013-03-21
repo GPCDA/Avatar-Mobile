@@ -16,6 +16,8 @@
 
 package com.example.avatarcertificacao.util;
 
+import com.example.avatarcertificacao.R;
+
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
 

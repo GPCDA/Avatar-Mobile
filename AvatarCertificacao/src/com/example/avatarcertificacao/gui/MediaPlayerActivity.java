@@ -9,11 +9,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
-<<<<<<< HEAD
 import android.content.Intent;
-=======
 import android.content.res.Resources;
->>>>>>> experimental
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.AnimationDrawable;
@@ -119,15 +116,12 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		type = extraBundle.getInt("type");
 
 		message = MessageController.getInstance(this).getMessage(id);
-<<<<<<< HEAD
+		
 		if (message.getName().isEmpty()) {
 			courseTextView.setText(R.string.admin);
 		} else {
 			courseTextView.setText(message.getName());
 		}
-		
-=======
-		courseTextView.setText(message.getName());
 
 		loadAnimation();
 
@@ -135,19 +129,10 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 		//createBitmapList();
 
->>>>>>> experimental
 		new LoadImagesTask().execute();
 
 	}
 
-<<<<<<< HEAD
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		getMenuInflater().inflate(R.menu.activity_main, menu);
-//		return true;
-//	}
-	
-=======
 	private void findImageViews() {
 		repouso = (ImageView) findViewById(R.idImage.repouso);
 
@@ -252,13 +237,6 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
-	}
-
->>>>>>> experimental
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -649,40 +627,39 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		return buffer;
 	}
 
-<<<<<<< HEAD
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.option_menu, menu);
-	    return true;
-	}
-	
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent intent;
-		switch (item.getItemId()) {
-//		case R.optionMenu.settings:
-//			intent = new Intent(this, SettingsScreen.class);
-//			startActivity(intent);
-//			break;
-		case R.optionMenu.logout:
-			if (SessionStore.logout(this)) {
-				intent = new Intent(this, LoginScreen.class);
-				startActivity(intent);
-				finish();
-			} else {
-				Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
-			}
-			
-			break;
 
-		default:
-			break;
-		}
-		return false;
-		
-	}
-=======
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//	    MenuInflater inflater = getMenuInflater();
+//	    inflater.inflate(R.menu.option_menu, menu);
+//	    return true;
+//	}
+//	
+//	@Override
+//	public boolean onOptionsItemSelected(MenuItem item) {
+//		Intent intent;
+//		switch (item.getItemId()) {
+////		case R.optionMenu.settings:
+////			intent = new Intent(this, SettingsScreen.class);
+////			startActivity(intent);
+////			break;
+//		case R.optionMenu.logout:
+//			if (SessionStore.logout(this)) {
+//				intent = new Intent(this, LoginScreen.class);
+//				startActivity(intent);
+//				finish();
+//			} else {
+//				Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
+//			}
+//			
+//			break;
+//
+//		default:
+//			break;
+//		}
+//		return false;
+//		
+//	}
 	public class LoadAnimationListTask extends AsyncTask<Void, Void, Void> {
 		int delay;
 		int id;
@@ -762,5 +739,4 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		}
 	}
 
->>>>>>> experimental
 }
