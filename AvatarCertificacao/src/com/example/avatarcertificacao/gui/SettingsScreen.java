@@ -1,8 +1,9 @@
 package com.example.avatarcertificacao.gui;
 
-import com.example.avatarcertificacao.R;
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.avatarcertificacao.R;
 
 
 public class SettingsScreen extends Activity {

@@ -9,7 +9,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,59 +21,54 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.util.LruCache;
 import android.util.Base64;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.data.MessageController;
 import com.example.avatarcertificacao.model.Message;
 import com.example.avatarcertificacao.model.Visema;
-import com.example.avatarcertificacao.util.SessionStore;
 import com.example.avatarcertificacao.util.Util;
 
 public class MediaPlayerActivity extends Activity implements OnClickListener {
 
-	private ImageView a_;
-	private ImageView a;
-	private ImageView emai;
-	private ImageView emin;
-	private ImageView f1;
-	private ImageView f2;
-	private ImageView i1min;
-	private ImageView i2min;
-	private ImageView lmai;
-	private ImageView k1;
-	private ImageView k2;
-	private ImageView k3;
-	private ImageView l1mai;
-	private ImageView l1min;
-	private ImageView l2mai;
-	private ImageView l3mai;
-	private ImageView l3min;
-	private ImageView l4min;
-	private ImageView omai;
-	private ImageView omin;
-	private ImageView p1;
-	private ImageView p2;
-	private ImageView r1;
-	private ImageView r2;
-	private ImageView repouso;
-	private ImageView s1mai;
-	private ImageView s2mai;
-	private ImageView s2min;
-	private ImageView t1;
-	private ImageView t2;
-	private ImageView u;
-	private ImageView u_;
+	//	private ImageView a_;
+	//	private ImageView a;
+	//	private ImageView emai;
+	//	private ImageView emin;
+	//	private ImageView f1;
+	//	private ImageView f2;
+	//	private ImageView i1min;
+	//	private ImageView i2min;
+	//	private ImageView lmai;
+	//	private ImageView k1;
+	//	private ImageView k2;
+	//	private ImageView k3;
+	//	private ImageView l1mai;
+	//	private ImageView l1min;
+	//	private ImageView l2mai;
+	//	private ImageView l3mai;
+	//	private ImageView l3min;
+	//	private ImageView l4min;
+	//	private ImageView omai;
+	//	private ImageView omin;
+	//	private ImageView p1;
+	//	private ImageView p2;
+	//	private ImageView r1;
+	//	private ImageView r2;
+	//	private ImageView repouso;
+	//	private ImageView s1mai;
+	//	private ImageView s2mai;
+	//	private ImageView s2min;
+	//	private ImageView t1;
+	//	private ImageView t2;
+	//	private ImageView u;
+	//	private ImageView u_;
 
 	public ImageView currentImageView;
-	
+
 	private static final int WARNING = 0;
 	private static final int MESSAGE = 1;
 	MediaPlayer mp;
@@ -118,7 +112,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		Bundle extraBundle = getIntent().getBundleExtra("message.details");
 		int id = extraBundle.getInt("id");
 		message = MessageController.getInstance(this).getMessage(id);
-		
+
 		if (message.getName().isEmpty()) {
 			courseTextView.setText(R.string.admin);
 		} else {
@@ -127,109 +121,109 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 	}
 
-	private void findImageViews() {
-		repouso = (ImageView) findViewById(R.idImage.repouso);
-
-		a = (ImageView) findViewById(R.idImage.a);
-		a.setVisibility(View.GONE);
-
-		a_ = (ImageView) findViewById(R.idImage.a_);
-		a_.setVisibility(View.GONE);
-
-		emai = (ImageView) findViewById(R.idImage.emai);
-		emai.setVisibility(View.GONE);
-
-		emin = (ImageView) findViewById(R.idImage.emin);
-		emin.setVisibility(View.GONE);
-
-		f1 = (ImageView) findViewById(R.idImage.f1);
-		f1.setVisibility(View.GONE);
-
-		f2 = (ImageView) findViewById(R.idImage.f2);
-		f2.setVisibility(View.GONE);
-
-		i1min = (ImageView) findViewById(R.idImage.i1min);
-		i1min.setVisibility(View.GONE);
-
-		i2min = (ImageView) findViewById(R.idImage.i2min);
-		i2min.setVisibility(View.GONE);
-
-		imai = (ImageView) findViewById(R.idImage.imai);
-		imai.setVisibility(View.GONE);
-
-		k1 = (ImageView) findViewById(R.idImage.k1);
-		k1.setVisibility(View.GONE);
-
-		k2 = (ImageView) findViewById(R.idImage.k2);
-		k2.setVisibility(View.GONE);
-
-		k3 = (ImageView) findViewById(R.idImage.k3);
-		k3.setVisibility(View.GONE);
-
-		l1mai = (ImageView) findViewById(R.idImage.l1mai);
-		l1mai.setVisibility(View.GONE);
-
-		l1min = (ImageView) findViewById(R.idImage.l1min);
-		l1min.setVisibility(View.GONE);
-
-		l2min = (ImageView) findViewById(R.idImage.l2min);
-		l2min.setVisibility(View.GONE);
-
-		l3mai = (ImageView) findViewById(R.idImage.l3mai);
-		l3mai.setVisibility(View.GONE);
-
-		l3mai = (ImageView) findViewById(R.idImage.l3mai);
-		l3mai.setVisibility(View.GONE);
-
-		l3min = (ImageView) findViewById(R.idImage.l3min);
-		l3min.setVisibility(View.GONE);
-
-		l4min = (ImageView) findViewById(R.idImage.l4min);
-		l4min.setVisibility(View.GONE);
-
-		omai = (ImageView) findViewById(R.idImage.omai);
-		omai.setVisibility(View.GONE);
-
-		omin = (ImageView) findViewById(R.idImage.omin);
-		omin.setVisibility(View.GONE);
-
-		p1 = (ImageView) findViewById(R.idImage.p1);
-		p1.setVisibility(View.GONE);
-
-		p2 = (ImageView) findViewById(R.idImage.p2);
-		p2.setVisibility(View.GONE);
-
-		r1 = (ImageView) findViewById(R.idImage.r1);
-		r1.setVisibility(View.GONE);
-
-		r2 = (ImageView) findViewById(R.idImage.r2);
-		r2.setVisibility(View.GONE);
-
-		s1mai = (ImageView) findViewById(R.idImage.s1mai);
-		s1mai.setVisibility(View.GONE);
-
-		s1min = (ImageView) findViewById(R.idImage.s1min);
-		s1min.setVisibility(View.GONE);
-
-		s2mai = (ImageView) findViewById(R.idImage.s2mai);
-		s2mai.setVisibility(View.GONE);
-
-		s2min = (ImageView) findViewById(R.idImage.s2min);
-		s2min.setVisibility(View.GONE);
-
-		t1 = (ImageView) findViewById(R.idImage.t1);
-		t1.setVisibility(View.GONE);
-
-		t2 = (ImageView) findViewById(R.idImage.t2);
-		t2.setVisibility(View.GONE);
-
-		u = (ImageView) findViewById(R.idImage.u);
-		u.setVisibility(View.GONE);
-
-		u_ = (ImageView) findViewById(R.idImage.u_);
-		u_.setVisibility(View.GONE);
-
-	}
+	//	private void findImageViews() {
+	//		repouso = (ImageView) findViewById(R.idImage.repouso);
+	//
+	//		a = (ImageView) findViewById(R.idImage.a);
+	//		a.setVisibility(View.GONE);
+	//
+	//		a_ = (ImageView) findViewById(R.idImage.a_);
+	//		a_.setVisibility(View.GONE);
+	//
+	//		emai = (ImageView) findViewById(R.idImage.emai);
+	//		emai.setVisibility(View.GONE);
+	//
+	//		emin = (ImageView) findViewById(R.idImage.emin);
+	//		emin.setVisibility(View.GONE);
+	//
+	//		f1 = (ImageView) findViewById(R.idImage.f1);
+	//		f1.setVisibility(View.GONE);
+	//
+	//		f2 = (ImageView) findViewById(R.idImage.f2);
+	//		f2.setVisibility(View.GONE);
+	//
+	//		i1min = (ImageView) findViewById(R.idImage.i1min);
+	//		i1min.setVisibility(View.GONE);
+	//
+	//		i2min = (ImageView) findViewById(R.idImage.i2min);
+	//		i2min.setVisibility(View.GONE);
+	//
+	//		imai = (ImageView) findViewById(R.idImage.imai);
+	//		imai.setVisibility(View.GONE);
+	//
+	//		k1 = (ImageView) findViewById(R.idImage.k1);
+	//		k1.setVisibility(View.GONE);
+	//
+	//		k2 = (ImageView) findViewById(R.idImage.k2);
+	//		k2.setVisibility(View.GONE);
+	//
+	//		k3 = (ImageView) findViewById(R.idImage.k3);
+	//		k3.setVisibility(View.GONE);
+	//
+	//		l1mai = (ImageView) findViewById(R.idImage.l1mai);
+	//		l1mai.setVisibility(View.GONE);
+	//
+	//		l1min = (ImageView) findViewById(R.idImage.l1min);
+	//		l1min.setVisibility(View.GONE);
+	//
+	//		l2min = (ImageView) findViewById(R.idImage.l2min);
+	//		l2min.setVisibility(View.GONE);
+	//
+	//		l3mai = (ImageView) findViewById(R.idImage.l3mai);
+	//		l3mai.setVisibility(View.GONE);
+	//
+	//		l3mai = (ImageView) findViewById(R.idImage.l3mai);
+	//		l3mai.setVisibility(View.GONE);
+	//
+	//		l3min = (ImageView) findViewById(R.idImage.l3min);
+	//		l3min.setVisibility(View.GONE);
+	//
+	//		l4min = (ImageView) findViewById(R.idImage.l4min);
+	//		l4min.setVisibility(View.GONE);
+	//
+	//		omai = (ImageView) findViewById(R.idImage.omai);
+	//		omai.setVisibility(View.GONE);
+	//
+	//		omin = (ImageView) findViewById(R.idImage.omin);
+	//		omin.setVisibility(View.GONE);
+	//
+	//		p1 = (ImageView) findViewById(R.idImage.p1);
+	//		p1.setVisibility(View.GONE);
+	//
+	//		p2 = (ImageView) findViewById(R.idImage.p2);
+	//		p2.setVisibility(View.GONE);
+	//
+	//		r1 = (ImageView) findViewById(R.idImage.r1);
+	//		r1.setVisibility(View.GONE);
+	//
+	//		r2 = (ImageView) findViewById(R.idImage.r2);
+	//		r2.setVisibility(View.GONE);
+	//
+	//		s1mai = (ImageView) findViewById(R.idImage.s1mai);
+	//		s1mai.setVisibility(View.GONE);
+	//
+	//		s1min = (ImageView) findViewById(R.idImage.s1min);
+	//		s1min.setVisibility(View.GONE);
+	//
+	//		s2mai = (ImageView) findViewById(R.idImage.s2mai);
+	//		s2mai.setVisibility(View.GONE);
+	//
+	//		s2min = (ImageView) findViewById(R.idImage.s2min);
+	//		s2min.setVisibility(View.GONE);
+	//
+	//		t1 = (ImageView) findViewById(R.idImage.t1);
+	//		t1.setVisibility(View.GONE);
+	//
+	//		t2 = (ImageView) findViewById(R.idImage.t2);
+	//		t2.setVisibility(View.GONE);
+	//
+	//		u = (ImageView) findViewById(R.idImage.u);
+	//		u.setVisibility(View.GONE);
+	//
+	//		u_ = (ImageView) findViewById(R.idImage.u_);
+	//		u_.setVisibility(View.GONE);
+	//
+	//	}
 
 	@Override
 	public void onPause() {
@@ -241,12 +235,10 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.playAvisoButton:
-				new LoadImagesTask().execute();
-				playMedia(WARNING);
+				new LoadImagesTask(WARNING).execute();
 				break;
 			case R.id.playMessageButton:
-				new LoadImagesTask().execute();
-				playMedia(MESSAGE);
+				new LoadImagesTask(MESSAGE).execute();
 				break;
 		}
 	}
@@ -259,7 +251,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	private void dodraw() {
 		// TODO Auto-generated method stub
 		this.runOnUiThread(new Runnable() {
-			
+
 			private Bitmap bm;
 
 			@Override
@@ -273,7 +265,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 					image.setDrawingCacheQuality(ImageView.DRAWING_CACHE_QUALITY_LOW);
 					bm = BitmapFactory.decodeByteArray(bufferedImgs.get(current), 0, bufferedImgs.get(current).length);
 					image.setImageBitmap(bm);
-					handler.postDelayed(this, mVisemaList.get(current).getDelay()-60);
+					handler.postDelayed(this, mVisemaList.get(current).getDelay());
 					current++;
 				}
 
@@ -294,7 +286,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		}
 		teste.setOneShot(true);
 		image.setBackgroundDrawable(teste);
-//		playMedia(message.getAvatarId());
+		//		playMedia(message.getAvatarId());
 		image.post(new Runnable() {
 			@Override
 			public void run() {
@@ -324,7 +316,11 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	private void playSound(int ID) {
 
 		byte[] decoded;
-		if (ID == MESSAGE) {
+		
+		if (Util.isStub) {
+			writeToFile(getString(R.string.stub_sound));
+			decoded = Base64.decode(getString(R.string.stub_sound), 0);
+		} else if (ID == MESSAGE) {
 			writeToFile(message.getMsgAudio());
 			decoded = Base64.decode(message.getMsgAudio(), 0);
 		} else {
@@ -348,7 +344,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
 					// TODO Auto-generated method stub
-					current = mVisemaList.size()-2;
+					current = mVisemaList.size() - 2;
 				}
 			});
 
@@ -367,6 +363,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	final Runnable animation = new Runnable() {
 		private int current = 0;
 		private Bitmap bm;
+
 		@Override
 		public void run() {
 			if (current < mVisemaList.size()) {
@@ -385,11 +382,16 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	};
 
 	public class LoadImagesTask extends AsyncTask<Integer, Void, Void> {
+		int id;
+
+		public LoadImagesTask(int id) {
+			this.id = id;
+		}
 
 		@Override
 		protected Void doInBackground(Integer... params) {
 			// TODO Auto-generated method stub
-			loadAnimation(params[0]);
+			loadAnimation(id);
 			loadImagesBytes();
 			return null;
 		}
@@ -407,6 +409,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
+			playMedia(id);
 			super.onPostExecute(result);
 		}
 
@@ -430,118 +433,118 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		}
 	}
 
-	private void setImagesViewsToVisemas() {
-		// TODO Auto-generated method stub
-		for (Visema visema : mVisemaList) {
-			switch (visema.getId()) {
-				case R.drawable.a:
-					visema.setImgView(a);
-					break;
-				case R.drawable.a_:
-					visema.setImgView(a_);
-					break;
-				case R.drawable.emai:
-					visema.setImgView(emai);
-					break;
-				case R.drawable.emin:
-					visema.setImgView(emin);
-					break;
-				case R.drawable.f1:
-					visema.setImgView(f1);
-					break;
-				case R.drawable.f2:
-					visema.setImgView(f2);
-					break;
-				case R.drawable.i1min:
-					visema.setImgView(i1min);
-					break;
-				case R.drawable.i2min:
-					visema.setImgView(i2min);
-					break;
-				case R.drawable.imai:
-					visema.setImgView(imai);
-					break;
-				case R.drawable.k1:
-					visema.setImgView(k1);
-					break;
-				case R.drawable.k2:
-					visema.setImgView(k2);
-					break;
-				case R.drawable.k3:
-					visema.setImgView(k3);
-					break;
-				case R.drawable.l1min:
-					visema.setImgView(l1min);
-					break;
-				case R.drawable.l1mai:
-					visema.setImgView(l1mai);
-					break;
-				case R.drawable.l2min:
-					visema.setImgView(l2min);
-					break;
-				case R.drawable.l2mai:
-					visema.setImgView(l2mai);
-					break;
-				case R.drawable.l3mai:
-					visema.setImgView(l3mai);
-					break;
-				case R.drawable.l3min:
-					visema.setImgView(l3min);
-					break;
-				case R.drawable.l4min:
-					visema.setImgView(l4min);
-					break;
-				case R.drawable.omai:
-					visema.setImgView(omai);
-					break;
-				case R.drawable.omin:
-					visema.setImgView(omin);
-					break;
-				case R.drawable.p1:
-					visema.setImgView(p1);
-					break;
-				case R.drawable.p2:
-					visema.setImgView(p2);
-					break;
-				case R.drawable.r1:
-					visema.setImgView(r1);
-					break;
-				case R.drawable.r2:
-					visema.setImgView(r2);
-					break;
-				case R.drawable.repouso:
-					visema.setImgView(repouso);
-					break;
-				case R.drawable.s1mai:
-					visema.setImgView(s1mai);
-					break;
-				case R.drawable.s2mai:
-					visema.setImgView(s2mai);
-					break;
-				case R.drawable.s1min:
-					visema.setImgView(s1min);
-					break;
-				case R.drawable.s2min:
-					visema.setImgView(s2min);
-					break;
-				case R.drawable.t1:
-					visema.setImgView(t1);
-					break;
-				case R.drawable.t2:
-					visema.setImgView(t2);
-					break;
-
-				case R.drawable.u:
-					visema.setImgView(u);
-					break;
-				case R.drawable.u_:
-					visema.setImgView(u_);
-					break;
-			}
-
-		}
-
-	}
+	//	private void setImagesViewsToVisemas() {
+	//		// TODO Auto-generated method stub
+	//		for (Visema visema : mVisemaList) {
+	//			switch (visema.getId()) {
+	//				case R.drawable.a:
+	//					visema.setImgView(a);
+	//					break;
+	//				case R.drawable.a_:
+	//					visema.setImgView(a_);
+	//					break;
+	//				case R.drawable.emai:
+	//					visema.setImgView(emai);
+	//					break;
+	//				case R.drawable.emin:
+	//					visema.setImgView(emin);
+	//					break;
+	//				case R.drawable.f1:
+	//					visema.setImgView(f1);
+	//					break;
+	//				case R.drawable.f2:
+	//					visema.setImgView(f2);
+	//					break;
+	//				case R.drawable.i1min:
+	//					visema.setImgView(i1min);
+	//					break;
+	//				case R.drawable.i2min:
+	//					visema.setImgView(i2min);
+	//					break;
+	//				case R.drawable.imai:
+	//					visema.setImgView(imai);
+	//					break;
+	//				case R.drawable.k1:
+	//					visema.setImgView(k1);
+	//					break;
+	//				case R.drawable.k2:
+	//					visema.setImgView(k2);
+	//					break;
+	//				case R.drawable.k3:
+	//					visema.setImgView(k3);
+	//					break;
+	//				case R.drawable.l1min:
+	//					visema.setImgView(l1min);
+	//					break;
+	//				case R.drawable.l1mai:
+	//					visema.setImgView(l1mai);
+	//					break;
+	//				case R.drawable.l2min:
+	//					visema.setImgView(l2min);
+	//					break;
+	//				case R.drawable.l2mai:
+	//					visema.setImgView(l2mai);
+	//					break;
+	//				case R.drawable.l3mai:
+	//					visema.setImgView(l3mai);
+	//					break;
+	//				case R.drawable.l3min:
+	//					visema.setImgView(l3min);
+	//					break;
+	//				case R.drawable.l4min:
+	//					visema.setImgView(l4min);
+	//					break;
+	//				case R.drawable.omai:
+	//					visema.setImgView(omai);
+	//					break;
+	//				case R.drawable.omin:
+	//					visema.setImgView(omin);
+	//					break;
+	//				case R.drawable.p1:
+	//					visema.setImgView(p1);
+	//					break;
+	//				case R.drawable.p2:
+	//					visema.setImgView(p2);
+	//					break;
+	//				case R.drawable.r1:
+	//					visema.setImgView(r1);
+	//					break;
+	//				case R.drawable.r2:
+	//					visema.setImgView(r2);
+	//					break;
+	//				case R.drawable.repouso:
+	//					visema.setImgView(repouso);
+	//					break;
+	//				case R.drawable.s1mai:
+	//					visema.setImgView(s1mai);
+	//					break;
+	//				case R.drawable.s2mai:
+	//					visema.setImgView(s2mai);
+	//					break;
+	//				case R.drawable.s1min:
+	//					visema.setImgView(s1min);
+	//					break;
+	//				case R.drawable.s2min:
+	//					visema.setImgView(s2min);
+	//					break;
+	//				case R.drawable.t1:
+	//					visema.setImgView(t1);
+	//					break;
+	//				case R.drawable.t2:
+	//					visema.setImgView(t2);
+	//					break;
+	//
+	//				case R.drawable.u:
+	//					visema.setImgView(u);
+	//					break;
+	//				case R.drawable.u_:
+	//					visema.setImgView(u_);
+	//					break;
+	//			}
+	//
+	//		}
+	//
+	//	}
 
 	public byte[] getBytesFromResource(final int res) {
 		byte[] buffer = null;
@@ -569,39 +572,38 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		return buffer;
 	}
 
-
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//	    MenuInflater inflater = getMenuInflater();
-//	    inflater.inflate(R.menu.option_menu, menu);
-//	    return true;
-//	}
-//	
-//	@Override
-//	public boolean onOptionsItemSelected(MenuItem item) {
-//		Intent intent;
-//		switch (item.getItemId()) {
-////		case R.optionMenu.settings:
-////			intent = new Intent(this, SettingsScreen.class);
-////			startActivity(intent);
-////			break;
-//		case R.optionMenu.logout:
-//			if (SessionStore.logout(this)) {
-//				intent = new Intent(this, LoginScreen.class);
-//				startActivity(intent);
-//				finish();
-//			} else {
-//				Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
-//			}
-//			
-//			break;
-//
-//		default:
-//			break;
-//		}
-//		return false;
-//		
-//	}
+	//	@Override
+	//	public boolean onCreateOptionsMenu(Menu menu) {
+	//	    MenuInflater inflater = getMenuInflater();
+	//	    inflater.inflate(R.menu.option_menu, menu);
+	//	    return true;
+	//	}
+	//	
+	//	@Override
+	//	public boolean onOptionsItemSelected(MenuItem item) {
+	//		Intent intent;
+	//		switch (item.getItemId()) {
+	////		case R.optionMenu.settings:
+	////			intent = new Intent(this, SettingsScreen.class);
+	////			startActivity(intent);
+	////			break;
+	//		case R.optionMenu.logout:
+	//			if (SessionStore.logout(this)) {
+	//				intent = new Intent(this, LoginScreen.class);
+	//				startActivity(intent);
+	//				finish();
+	//			} else {
+	//				Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
+	//			}
+	//			
+	//			break;
+	//
+	//		default:
+	//			break;
+	//		}
+	//		return false;
+	//		
+	//	}
 	public class LoadAnimationListTask extends AsyncTask<Void, Void, Void> {
 		int delay;
 		int id;
