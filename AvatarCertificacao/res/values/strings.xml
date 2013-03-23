@@ -64,6 +64,6 @@
     <string name="aviso">Aviso</string>
     <string name="msg">Mensagem</string>
     <string name="meus_cursos">Meus cursos</string>
-    <string name="clicktoplay">Toque no avatar para tocar</string>
+    <string name="click_to_play">Clique no icone para ouvir o aviso ou mensagem</string>
     
 </resources>

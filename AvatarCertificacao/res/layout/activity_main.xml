@@ -41,11 +41,35 @@
             android:src="@drawable/repouso" />
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/play_pause_button"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:contentDescription="@null"
-        android:src="@drawable/play_btn" />
+        android:orientation="horizontal" 
+        android:gravity="center">
 
+        <ImageView
+            android:id="@+id/playAvisoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:src="@drawable/aviso_icon" 
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/playMessageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@null"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/message_icon" />
+        
+    </LinearLayout>
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="4dp"
+        android:text="@string/click_to_play"
+        android:textColor="#3e4095"
+        android:textSize="14sp"/>
 </LinearLayout>

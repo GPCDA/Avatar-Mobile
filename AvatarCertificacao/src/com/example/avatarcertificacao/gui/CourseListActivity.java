@@ -6,15 +6,17 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.data.MessageController;
-import com.example.avatarcertificacao.util.CourseListAdapter;
 import com.example.avatarcertificacao.util.SessionStore;
 
-public class CourseListActivity extends Activity {
+public class CourseListActivity extends Activity implements OnItemClickListener {
 
 	ListView courseList;
 
@@ -24,10 +26,10 @@ public class CourseListActivity extends Activity {
 		setContentView(R.layout.course_list_screen);
 
 		CourseListAdapter adapter = new CourseListAdapter(this, R.layout.course_list_item, MessageController.getInstance(this).getCourseMessageList());
-
+		
 		courseList = (ListView) findViewById(R.idCourseListScreen.courseListView);
 		courseList.setAdapter(adapter);
-
+		courseList.setOnItemClickListener(this);
 	}
 
 	@Override
@@ -60,6 +62,16 @@ public class CourseListActivity extends Activity {
 			break;
 		}
 		return false;
+		
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long arg) {
+		Intent intent = new Intent(this, MediaPlayerActivity.class);
+		Bundle b = new Bundle();
+		b.putInt("id", MessageController.getInstance(this).getCourseMessageList().get(position).getId());
+		intent.putExtra("message.details", b);
+		parent.getContext().startActivity(intent);	
 		
 	}
 }
