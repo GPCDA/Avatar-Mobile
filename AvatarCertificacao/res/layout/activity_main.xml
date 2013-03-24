@@ -24,6 +24,7 @@
         android:background="@drawable/circle_margin" >
 
         <ImageView
+            android:id="@+id/avatar_imgview"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_centerInParent="true"

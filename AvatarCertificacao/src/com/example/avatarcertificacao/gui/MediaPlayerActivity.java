@@ -21,6 +21,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.support.v4.util.LruCache;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -34,43 +35,12 @@ import com.example.avatarcertificacao.util.Util;
 
 public class MediaPlayerActivity extends Activity implements OnClickListener {
 
-	//	private ImageView a_;
-	//	private ImageView a;
-	//	private ImageView emai;
-	//	private ImageView emin;
-	//	private ImageView f1;
-	//	private ImageView f2;
-	//	private ImageView i1min;
-	//	private ImageView i2min;
-	//	private ImageView lmai;
-	//	private ImageView k1;
-	//	private ImageView k2;
-	//	private ImageView k3;
-	//	private ImageView l1mai;
-	//	private ImageView l1min;
-	//	private ImageView l2mai;
-	//	private ImageView l3mai;
-	//	private ImageView l3min;
-	//	private ImageView l4min;
-	//	private ImageView omai;
-	//	private ImageView omin;
-	//	private ImageView p1;
-	//	private ImageView p2;
-	//	private ImageView r1;
-	//	private ImageView r2;
-	//	private ImageView repouso;
-	//	private ImageView s1mai;
-	//	private ImageView s2mai;
-	//	private ImageView s2min;
-	//	private ImageView t1;
-	//	private ImageView t2;
-	//	private ImageView u;
-	//	private ImageView u_;
-
 	public ImageView currentImageView;
 
 	private static final int WARNING = 0;
 	private static final int MESSAGE = 1;
+	private static final int BLINKING_TIME = 200;
+	private static final int EYESOPEN_DELAY = 5000;
 	MediaPlayer mp;
 	ImageView btnPlayWarning;
 	ImageView btnPlayMessage;
@@ -86,12 +56,12 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	private LruCache<Integer, Bitmap> mMemoryCache;
 
 	final Handler handler = new Handler();
+	private boolean isEyeOpen;
 
 	Message message;
 	int type;
-	private ImageView l2min;
-	private ImageView imai;
-	private ImageView s1min;
+
+	private ImageView avatarImgView;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -100,6 +70,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 		//animationView = (MyAnimationView) findViewById(R.id.anim_view);
 		image = (ImageView) findViewById(R.id.anim_view);
+		avatarImgView = (ImageView) findViewById(R.id.avatar_imgview);
 		//animationView.loadAnimation("shark", 16, Util.MASCULINO);
 
 		btnPlayWarning = (ImageView) findViewById(R.id.playAvisoButton);
@@ -119,111 +90,31 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			courseTextView.setText(message.getName());
 		}
 
+		isEyeOpen = true;
+
+		doBlink();
 	}
 
-	//	private void findImageViews() {
-	//		repouso = (ImageView) findViewById(R.idImage.repouso);
-	//
-	//		a = (ImageView) findViewById(R.idImage.a);
-	//		a.setVisibility(View.GONE);
-	//
-	//		a_ = (ImageView) findViewById(R.idImage.a_);
-	//		a_.setVisibility(View.GONE);
-	//
-	//		emai = (ImageView) findViewById(R.idImage.emai);
-	//		emai.setVisibility(View.GONE);
-	//
-	//		emin = (ImageView) findViewById(R.idImage.emin);
-	//		emin.setVisibility(View.GONE);
-	//
-	//		f1 = (ImageView) findViewById(R.idImage.f1);
-	//		f1.setVisibility(View.GONE);
-	//
-	//		f2 = (ImageView) findViewById(R.idImage.f2);
-	//		f2.setVisibility(View.GONE);
-	//
-	//		i1min = (ImageView) findViewById(R.idImage.i1min);
-	//		i1min.setVisibility(View.GONE);
-	//
-	//		i2min = (ImageView) findViewById(R.idImage.i2min);
-	//		i2min.setVisibility(View.GONE);
-	//
-	//		imai = (ImageView) findViewById(R.idImage.imai);
-	//		imai.setVisibility(View.GONE);
-	//
-	//		k1 = (ImageView) findViewById(R.idImage.k1);
-	//		k1.setVisibility(View.GONE);
-	//
-	//		k2 = (ImageView) findViewById(R.idImage.k2);
-	//		k2.setVisibility(View.GONE);
-	//
-	//		k3 = (ImageView) findViewById(R.idImage.k3);
-	//		k3.setVisibility(View.GONE);
-	//
-	//		l1mai = (ImageView) findViewById(R.idImage.l1mai);
-	//		l1mai.setVisibility(View.GONE);
-	//
-	//		l1min = (ImageView) findViewById(R.idImage.l1min);
-	//		l1min.setVisibility(View.GONE);
-	//
-	//		l2min = (ImageView) findViewById(R.idImage.l2min);
-	//		l2min.setVisibility(View.GONE);
-	//
-	//		l3mai = (ImageView) findViewById(R.idImage.l3mai);
-	//		l3mai.setVisibility(View.GONE);
-	//
-	//		l3mai = (ImageView) findViewById(R.idImage.l3mai);
-	//		l3mai.setVisibility(View.GONE);
-	//
-	//		l3min = (ImageView) findViewById(R.idImage.l3min);
-	//		l3min.setVisibility(View.GONE);
-	//
-	//		l4min = (ImageView) findViewById(R.idImage.l4min);
-	//		l4min.setVisibility(View.GONE);
-	//
-	//		omai = (ImageView) findViewById(R.idImage.omai);
-	//		omai.setVisibility(View.GONE);
-	//
-	//		omin = (ImageView) findViewById(R.idImage.omin);
-	//		omin.setVisibility(View.GONE);
-	//
-	//		p1 = (ImageView) findViewById(R.idImage.p1);
-	//		p1.setVisibility(View.GONE);
-	//
-	//		p2 = (ImageView) findViewById(R.idImage.p2);
-	//		p2.setVisibility(View.GONE);
-	//
-	//		r1 = (ImageView) findViewById(R.idImage.r1);
-	//		r1.setVisibility(View.GONE);
-	//
-	//		r2 = (ImageView) findViewById(R.idImage.r2);
-	//		r2.setVisibility(View.GONE);
-	//
-	//		s1mai = (ImageView) findViewById(R.idImage.s1mai);
-	//		s1mai.setVisibility(View.GONE);
-	//
-	//		s1min = (ImageView) findViewById(R.idImage.s1min);
-	//		s1min.setVisibility(View.GONE);
-	//
-	//		s2mai = (ImageView) findViewById(R.idImage.s2mai);
-	//		s2mai.setVisibility(View.GONE);
-	//
-	//		s2min = (ImageView) findViewById(R.idImage.s2min);
-	//		s2min.setVisibility(View.GONE);
-	//
-	//		t1 = (ImageView) findViewById(R.idImage.t1);
-	//		t1.setVisibility(View.GONE);
-	//
-	//		t2 = (ImageView) findViewById(R.idImage.t2);
-	//		t2.setVisibility(View.GONE);
-	//
-	//		u = (ImageView) findViewById(R.idImage.u);
-	//		u.setVisibility(View.GONE);
-	//
-	//		u_ = (ImageView) findViewById(R.idImage.u_);
-	//		u_.setVisibility(View.GONE);
-	//
-	//	}
+	private void doBlink() {
+		// TODO Auto-generated method stub
+		this.runOnUiThread(new Runnable() {
+			int delay;
+			@Override
+			public void run() {
+				if (isEyeOpen) {
+					delay = BLINKING_TIME;
+					avatarImgView.setImageResource(R.drawable.repouso_closed10);
+					isEyeOpen = false;
+				} else {
+					delay = EYESOPEN_DELAY ;
+					avatarImgView.setImageResource(R.drawable.senhor);
+					isEyeOpen = true;
+				}
+				handler.postDelayed(this, delay);
+			}
+		});
+
+	}
 
 	@Override
 	public void onPause() {
@@ -267,7 +158,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 					image.setImageBitmap(bm);
 					handler.postDelayed(this, mVisemaList.get(current).getDelay());
 					current++;
-				}
+				} 
 
 			}
 		});
@@ -316,7 +207,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	private void playSound(int ID) {
 
 		byte[] decoded;
-		
+
 		if (Util.isStub) {
 			writeToFile(getString(R.string.stub_sound));
 			decoded = Base64.decode(getString(R.string.stub_sound), 0);
@@ -340,11 +231,15 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			mediaPlayer.prepare();
 			mp = mediaPlayer;
 			mediaPlayer.start();
+			
+			
 			mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
 					// TODO Auto-generated method stub
-					current = mVisemaList.size() - 2;
+					Log.e("PAREI", "O SOM");
+					image.setImageResource(R.drawable.repouso);
+					current = mVisemaList.size();
 				}
 			});
 
@@ -409,6 +304,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		@Override
 		protected void onPostExecute(Void result) {
 			// TODO Auto-generated method stub
+			current = 0;
 			playMedia(id);
 			super.onPostExecute(result);
 		}
