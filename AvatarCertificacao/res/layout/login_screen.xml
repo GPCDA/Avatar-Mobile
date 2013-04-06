@@ -34,9 +34,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="http://54.235.153.150/ead/"
                 android:inputType="textUri" />
-
+            
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -47,7 +46,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="professor"
                 android:inputType="textEmailAddress" />
             
             <TextView
@@ -60,7 +58,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="-Admin123-"
                 android:inputType="textPassword" />
 
             <LinearLayout

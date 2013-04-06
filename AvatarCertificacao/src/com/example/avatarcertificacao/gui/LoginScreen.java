@@ -46,9 +46,9 @@ public class LoginScreen extends Activity implements OnClickListener {
         	}
         }
         
-//		moodleUrlEditText.setText(SessionStore.getUrl(this));
-//		usernameEditText.setText(SessionStore.getUsername(this));
-//		passwordEditText.setText(SessionStore.getPassword(this));
+		moodleUrlEditText.setText(SessionStore.getUrl(this));
+		usernameEditText.setText(SessionStore.getUsername(this));
+		passwordEditText.setText(SessionStore.getPassword(this));
 		if (!(SessionStore.getUrl(this).isEmpty() || 
 			SessionStore.getUsername(this).isEmpty() || 
 			SessionStore.getPassword(this).isEmpty())) {
@@ -64,7 +64,11 @@ public class LoginScreen extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.idLoginScreen.login_btn:
-				login();
+				if (!moodleUrlEditText.getText().toString().isEmpty()) {
+					login();
+				} else {
+					toast.show();
+				}
 				break;
 
 			default:
@@ -87,7 +91,7 @@ public class LoginScreen extends Activity implements OnClickListener {
 				@Override
 				protected void onPreExecute() {
 					showDialog();
-					loggedIn = false; 
+					loggedIn = false;
 					if (moodleUrlEditText.getText().toString().endsWith(getString(R.string.bar))) {
 						url = moodleUrlEditText.getText().toString()+getString(R.string.WSUrl);
 					} else {
