@@ -46,14 +46,14 @@ public class LoginScreen extends Activity implements OnClickListener {
         	}
         }
         
-//		moodleUrlEditText.setText(SessionStore.getUrl(this));
-//		usernameEditText.setText(SessionStore.getUsername(this));
-//		passwordEditText.setText(SessionStore.getPassword(this));
-//		if (!(SessionStore.getUrl(this).isEmpty() || 
-//			SessionStore.getUsername(this).isEmpty() || 
-//			SessionStore.getPassword(this).isEmpty())) {
-//    		login();
-//		}
+		moodleUrlEditText.setText(SessionStore.getUrl(this));
+		usernameEditText.setText(SessionStore.getUsername(this));
+		passwordEditText.setText(SessionStore.getPassword(this));
+		if (!(SessionStore.getUrl(this).isEmpty() || 
+			SessionStore.getUsername(this).isEmpty() || 
+			SessionStore.getPassword(this).isEmpty())) {
+    		login();
+		}
         
         btnLogin.setOnClickListener(this);
 		toast = Toast.makeText(this, R.string.login_erro,Toast.LENGTH_LONG);
