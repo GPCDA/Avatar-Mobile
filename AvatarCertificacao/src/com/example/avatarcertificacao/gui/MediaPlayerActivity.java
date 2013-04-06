@@ -9,23 +9,21 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
+import android.media.MediaPlayer.OnPreparedListener;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
-import android.support.v4.util.LruCache;
 import android.util.Base64;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.avatarcertificacao.R;
 import com.example.avatarcertificacao.data.MessageController;
@@ -41,25 +39,24 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	private static final int MESSAGE = 1;
 	private static final int BLINKING_TIME = 200;
 	private static final int EYESOPEN_DELAY = 5000;
-	MediaPlayer mp;
-	ImageView btnPlayWarning;
-	ImageView btnPlayMessage;
-	TextView courseTextView;
-	ArrayList<Visema> mList;
-	ArrayList<Bitmap> mBitmapList;
+
+	private MediaPlayer mp;
+	private ImageView btnPlayWarning;
+	private ImageView btnPlayMessage;
+	private TextView courseTextView;
 	public ArrayList<Visema> mVisemaList;
-	ArrayList<byte[]> bufferedImgs;
+	private ArrayList<byte[]> bufferedImgs;
 	public ImageView image;
 	public int count = 0;
 	private int current = 0;
-	AnimationDrawable teste;
-	private LruCache<Integer, Bitmap> mMemoryCache;
-
-	final Handler handler = new Handler();
+	private final Handler handler = new Handler();
 	private boolean isEyeOpen;
+	private int avatarResourceId;
+	private int avatarEyesClosedResourceId;
 
 	Message message;
 	int type;
+	
 
 	private ImageView avatarImgView;
 
@@ -68,10 +65,11 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 
-		//animationView = (MyAnimationView) findViewById(R.id.anim_view);
 		image = (ImageView) findViewById(R.id.anim_view);
 		avatarImgView = (ImageView) findViewById(R.id.avatar_imgview);
-		//animationView.loadAnimation("shark", 16, Util.MASCULINO);
+
+		//TODO descomentar quando a relacao entre avatarId e imagens estiver pronta.
+		//this.pickAvatarImages();
 
 		btnPlayWarning = (ImageView) findViewById(R.id.playAvisoButton);
 		btnPlayWarning.setOnClickListener(this);
@@ -95,10 +93,30 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		doBlink();
 	}
 
+	private void pickAvatarImages() {
+		//TODO relacionar o type com as imagens de avatar no projeto.
+		
+		int type = Util.defineAvatarType(Integer.valueOf(message.getAvatarId()));
+		
+//		switch (type) {
+//			case value:
+//				
+//				break;
+//
+//			default:
+//				break;
+//		}
+		
+//		avatarEyesClosedResourceId = *
+//		avatarResourceId = *		
+		
+		
+	}
+
 	private void doBlink() {
-		// TODO Auto-generated method stub
 		this.runOnUiThread(new Runnable() {
 			int delay;
+
 			@Override
 			public void run() {
 				if (isEyeOpen) {
@@ -106,7 +124,7 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 					avatarImgView.setImageResource(R.drawable.repouso_closed10);
 					isEyeOpen = false;
 				} else {
-					delay = EYESOPEN_DELAY ;
+					delay = EYESOPEN_DELAY;
 					avatarImgView.setImageResource(R.drawable.senhor);
 					isEyeOpen = true;
 				}
@@ -126,12 +144,35 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.playAvisoButton:
-				new LoadImagesTask(WARNING).execute();
+				if (!isEmptyList(WARNING))
+					new LoadImagesTask(WARNING).execute();
 				break;
 			case R.id.playMessageButton:
-				new LoadImagesTask(MESSAGE).execute();
+				if (!isEmptyList(MESSAGE))
+					new LoadImagesTask(MESSAGE).execute();
 				break;
 		}
+	}
+
+	private boolean isEmptyList(int listType) {
+		boolean isEmptyList = false;
+		switch (listType) {
+			case MESSAGE:
+				if (message.getMsgVisema().equals("")) {
+					showWarningMessage(getString(R.string.no_messages));
+					isEmptyList = true;
+				}
+				break;
+
+			case WARNING:
+				if (message.getNotifVisema().equals("")) {
+					showWarningMessage(getString(R.string.no_warning));
+					isEmptyList = true;
+				}
+
+				break;
+		}
+		return isEmptyList;
 	}
 
 	private void playMedia(int ID) {
@@ -140,7 +181,6 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	}
 
 	private void dodraw() {
-		// TODO Auto-generated method stub
 		this.runOnUiThread(new Runnable() {
 
 			private Bitmap bm;
@@ -158,30 +198,8 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 					image.setImageBitmap(bm);
 					handler.postDelayed(this, mVisemaList.get(current).getDelay());
 					current++;
-				} 
+				}
 
-			}
-		});
-	}
-
-	public void createAnimation() {
-		String filename;
-		String uri;
-		int id;
-		teste = new AnimationDrawable();
-		for (int i = 0; i < mVisemaList.size(); i++) {
-			filename = mVisemaList.get(i).getFileName();
-			uri = "drawable/" + filename;
-			id = this.getResources().getIdentifier(uri, null, this.getPackageName());
-			teste.addFrame(getResources().getDrawable(id), (int) mVisemaList.get(i).getDelay());
-		}
-		teste.setOneShot(true);
-		image.setBackgroundDrawable(teste);
-		//		playMedia(message.getAvatarId());
-		image.post(new Runnable() {
-			@Override
-			public void run() {
-				teste.start();
 			}
 		});
 	}
@@ -231,20 +249,27 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			mediaPlayer.prepare();
 			mp = mediaPlayer;
 			mediaPlayer.start();
-			
-			
-			mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+
+			mediaPlayer.setOnPreparedListener(new OnPreparedListener() {
+
 				@Override
-				public void onCompletion(MediaPlayer mp) {
-					// TODO Auto-generated method stub
-					Log.e("PAREI", "O SOM");
-					image.setImageResource(R.drawable.repouso);
-					current = mVisemaList.size();
+				public void onPrepared(MediaPlayer mp) {
+					btnPlayMessage.setEnabled(false);
+					btnPlayWarning.setEnabled(false);
 				}
 			});
 
-		} catch (IOException ex) {
-			String s = ex.toString();
+			mediaPlayer.setOnCompletionListener(new OnCompletionListener() {
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					image.setImageResource(R.drawable.repouso);
+					current = mVisemaList.size();
+					btnPlayMessage.setEnabled(true);
+					btnPlayWarning.setEnabled(true);
+				}
+			});
+
+		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
 	}
@@ -285,16 +310,12 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected Void doInBackground(Integer... params) {
-			// TODO Auto-generated method stub
 			loadAnimation(id);
 			loadImagesBytes();
 			return null;
 		}
 
 		private void loadImagesBytes() {
-			String uri = "";
-			String filename = "";
-			int id = 0;
 			bufferedImgs = new ArrayList<byte[]>();
 			for (int i = 0; i < mVisemaList.size(); i++) {
 				bufferedImgs.add(getBytesFromResource(mVisemaList.get(i).getId()));
@@ -303,7 +324,6 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
 			current = 0;
 			playMedia(id);
 			super.onPostExecute(result);
@@ -312,7 +332,6 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	}
 
 	public void loadAnimation(int ID) {
-		String visemaList;
 		if (mVisemaList != null) {
 			mVisemaList.clear();
 		}
@@ -324,123 +343,12 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			case WARNING:
 				mVisemaList = Util.createVisemaList(this, message.getNotifVisema(), message.getAvatarId());
 				break;
-			default:
-				break;
 		}
 	}
 
-	//	private void setImagesViewsToVisemas() {
-	//		// TODO Auto-generated method stub
-	//		for (Visema visema : mVisemaList) {
-	//			switch (visema.getId()) {
-	//				case R.drawable.a:
-	//					visema.setImgView(a);
-	//					break;
-	//				case R.drawable.a_:
-	//					visema.setImgView(a_);
-	//					break;
-	//				case R.drawable.emai:
-	//					visema.setImgView(emai);
-	//					break;
-	//				case R.drawable.emin:
-	//					visema.setImgView(emin);
-	//					break;
-	//				case R.drawable.f1:
-	//					visema.setImgView(f1);
-	//					break;
-	//				case R.drawable.f2:
-	//					visema.setImgView(f2);
-	//					break;
-	//				case R.drawable.i1min:
-	//					visema.setImgView(i1min);
-	//					break;
-	//				case R.drawable.i2min:
-	//					visema.setImgView(i2min);
-	//					break;
-	//				case R.drawable.imai:
-	//					visema.setImgView(imai);
-	//					break;
-	//				case R.drawable.k1:
-	//					visema.setImgView(k1);
-	//					break;
-	//				case R.drawable.k2:
-	//					visema.setImgView(k2);
-	//					break;
-	//				case R.drawable.k3:
-	//					visema.setImgView(k3);
-	//					break;
-	//				case R.drawable.l1min:
-	//					visema.setImgView(l1min);
-	//					break;
-	//				case R.drawable.l1mai:
-	//					visema.setImgView(l1mai);
-	//					break;
-	//				case R.drawable.l2min:
-	//					visema.setImgView(l2min);
-	//					break;
-	//				case R.drawable.l2mai:
-	//					visema.setImgView(l2mai);
-	//					break;
-	//				case R.drawable.l3mai:
-	//					visema.setImgView(l3mai);
-	//					break;
-	//				case R.drawable.l3min:
-	//					visema.setImgView(l3min);
-	//					break;
-	//				case R.drawable.l4min:
-	//					visema.setImgView(l4min);
-	//					break;
-	//				case R.drawable.omai:
-	//					visema.setImgView(omai);
-	//					break;
-	//				case R.drawable.omin:
-	//					visema.setImgView(omin);
-	//					break;
-	//				case R.drawable.p1:
-	//					visema.setImgView(p1);
-	//					break;
-	//				case R.drawable.p2:
-	//					visema.setImgView(p2);
-	//					break;
-	//				case R.drawable.r1:
-	//					visema.setImgView(r1);
-	//					break;
-	//				case R.drawable.r2:
-	//					visema.setImgView(r2);
-	//					break;
-	//				case R.drawable.repouso:
-	//					visema.setImgView(repouso);
-	//					break;
-	//				case R.drawable.s1mai:
-	//					visema.setImgView(s1mai);
-	//					break;
-	//				case R.drawable.s2mai:
-	//					visema.setImgView(s2mai);
-	//					break;
-	//				case R.drawable.s1min:
-	//					visema.setImgView(s1min);
-	//					break;
-	//				case R.drawable.s2min:
-	//					visema.setImgView(s2min);
-	//					break;
-	//				case R.drawable.t1:
-	//					visema.setImgView(t1);
-	//					break;
-	//				case R.drawable.t2:
-	//					visema.setImgView(t2);
-	//					break;
-	//
-	//				case R.drawable.u:
-	//					visema.setImgView(u);
-	//					break;
-	//				case R.drawable.u_:
-	//					visema.setImgView(u_);
-	//					break;
-	//			}
-	//
-	//		}
-	//
-	//	}
+	private void showWarningMessage(String warningMessage) {
+		Toast.makeText(this, warningMessage, Toast.LENGTH_SHORT).show();
+	}
 
 	public byte[] getBytesFromResource(final int res) {
 		byte[] buffer = null;
@@ -466,117 +374,6 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		}
 
 		return buffer;
-	}
-
-	//	@Override
-	//	public boolean onCreateOptionsMenu(Menu menu) {
-	//	    MenuInflater inflater = getMenuInflater();
-	//	    inflater.inflate(R.menu.option_menu, menu);
-	//	    return true;
-	//	}
-	//	
-	//	@Override
-	//	public boolean onOptionsItemSelected(MenuItem item) {
-	//		Intent intent;
-	//		switch (item.getItemId()) {
-	////		case R.optionMenu.settings:
-	////			intent = new Intent(this, SettingsScreen.class);
-	////			startActivity(intent);
-	////			break;
-	//		case R.optionMenu.logout:
-	//			if (SessionStore.logout(this)) {
-	//				intent = new Intent(this, LoginScreen.class);
-	//				startActivity(intent);
-	//				finish();
-	//			} else {
-	//				Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
-	//			}
-	//			
-	//			break;
-	//
-	//		default:
-	//			break;
-	//		}
-	//		return false;
-	//		
-	//	}
-	public class LoadAnimationListTask extends AsyncTask<Void, Void, Void> {
-		int delay;
-		int id;
-
-		public LoadAnimationListTask(int id, int delay) {
-			this.id = id;
-			this.delay = delay;
-		}
-
-		@Override
-		protected Void doInBackground(Void... params) {
-			// TODO Auto-generated method stub
-			teste.addFrame(getResources().getDrawable(id), delay);
-			return null;
-		}
-
-		@Override
-		protected void onPostExecute(Void result) {
-			// TODO Auto-generated method stub
-			count++;
-			super.onPostExecute(result);
-		}
-
-	}
-
-	public void createBitmap() {
-		BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeResource(getResources(), R.id.anim_view, options);
-		int imageHeight = options.outHeight;
-		int imageWidth = options.outWidth;
-		String imageType = options.outMimeType;
-
-	}
-
-	public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId, int reqWidth, int reqHeight) {
-
-		// First decode with inJustDecodeBounds=true to check dimensions
-		final BitmapFactory.Options options = new BitmapFactory.Options();
-		options.inJustDecodeBounds = true;
-		BitmapFactory.decodeResource(res, resId, options);
-
-		// Calculate inSampleSize
-		options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
-
-		// Decode bitmap with inSampleSize set
-		options.inJustDecodeBounds = false;
-		return BitmapFactory.decodeResource(res, resId, options);
-	}
-
-	public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
-		// Raw height and width of image
-		final int height = options.outHeight;
-		final int width = options.outWidth;
-		int inSampleSize = 1;
-
-		if (height > reqHeight || width > reqWidth) {
-
-			// Calculate ratios of height and width to requested height and width
-			final int heightRatio = Math.round((float) height / (float) reqHeight);
-			final int widthRatio = Math.round((float) width / (float) reqWidth);
-
-			// Choose the smallest ratio as inSampleSize value, this will guarantee
-			// a final image with both dimensions larger than or equal to the
-			// requested height and width.
-			inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
-		}
-
-		return inSampleSize;
-	}
-
-	public void createBitmapList() {
-		mBitmapList = new ArrayList<Bitmap>();
-		for (int i = 0; i < mVisemaList.size(); i++) {
-			mBitmapList.add(decodeSampledBitmapFromResource(getResources(), mVisemaList.get(i).getId(), 500, 500));
-
-		}
 	}
 
 }

@@ -37,6 +37,7 @@
     <string name="admin">Administrador</string>
     <string name="configuracoes">Configurações</string>
 	<string name="no_messages">Não existe mensagem para você</string>
+	<string name="no_warning">Não existe aviso para você</string>
     
     <!-- Settings Screen -->
     <string name="geral">Geral</string>

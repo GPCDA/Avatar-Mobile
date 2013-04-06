@@ -46,9 +46,9 @@ public class LoginScreen extends Activity implements OnClickListener {
         	}
         }
         
-		moodleUrlEditText.setText(SessionStore.getUrl(this));
-		usernameEditText.setText(SessionStore.getUsername(this));
-		passwordEditText.setText(SessionStore.getPassword(this));
+//		moodleUrlEditText.setText(SessionStore.getUrl(this));
+//		usernameEditText.setText(SessionStore.getUsername(this));
+//		passwordEditText.setText(SessionStore.getPassword(this));
 		if (!(SessionStore.getUrl(this).isEmpty() || 
 			SessionStore.getUsername(this).isEmpty() || 
 			SessionStore.getPassword(this).isEmpty())) {
