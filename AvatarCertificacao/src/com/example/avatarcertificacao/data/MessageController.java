@@ -16,7 +16,7 @@ import com.example.avatarcertificacao.util.Util;
 import com.google.gson.Gson;
 
 public class MessageController {
-	private static MessageController instance;
+	private static MessageController instance = null;
 	private Context ctx;
 	private List<Message> msgList;
 	private DatabaseHandler db;
@@ -25,7 +25,7 @@ public class MessageController {
 	public static MessageController getInstance(Context ctx) {
 
 		if (instance == null) {
-			instance = new MessageController(ctx.getApplicationContext());
+			instance = new MessageController(ctx);
 		}
 		return instance;
 	}
@@ -33,7 +33,6 @@ public class MessageController {
 	private MessageController(Context ctx) {
 		this.ctx = ctx;
 		loadMessages();
-		this.db = new DatabaseHandler(ctx);
 	}
 
 	public void loadMessages() {
@@ -41,46 +40,12 @@ public class MessageController {
 			db = new DatabaseHandler(ctx);
 		}
 		this.msgList = db.getAllMessages();
-//		if (this.msgList == null || this.msgList.isEmpty()) {
-//			this.msgList = this.downloadMessages();
-//			this.saveOnDB();
-//		}
 	}
 
-	private ArrayList<Message> downloadMessages() {
 
-		ArrayList<Message> messageList = null;
-		try {
-			Gson gson = new Gson();
-			try {
-				messageList = new ArrayList<Message>();
-
-				String fileString = Util.readfile("json.txt", ctx);
-				JSONObject json = new JSONObject(fileString);
-
-				JSONArray jArray = json.getJSONArray("content");
-
-				for (int i = 0; i < jArray.length(); i++) {
-					String jsonString = jArray.getJSONObject(i).toString();
-					Message msg = gson.fromJson(jsonString, Message.class);
-					messageList.add(msg);
-				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//gson.fromJson(json, classOfT)
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return messageList;
-	}
 
 	public void saveOnDB(String messageJson) {
 		ArrayList<Message> messageList = null;
-//		Gson gson = new Gson();
 		try {
 			if (!messageJson.isEmpty()) {
 				messageList = new ArrayList<Message>();
@@ -93,27 +58,24 @@ public class MessageController {
 					Message msg =  new Message(jArray.getJSONObject(i));
 					messageList.add(msg);
 				}
+				this.msgList = messageList;
+				for (Message current : this.msgList) {
+					
+					db.addMessage(current);
+				}
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		msgList = messageList;
-		for (Message current : msgList) {
-			db.addMessage(current);
-		}
 	}
 	
-	private void saveOnDB() {
-		for (Message current : msgList) {
-			db.addMessage(current);
-		}
-	}
-
 	public List<Message> getMessageList() {
+		//loadMessages();
 		return this.msgList;
 	}
 
 	public int countUnredMsgs() {
+		//loadMessages();
 		int count = 0;
 		for (Message message : this.msgList) {
 			if (message.isMsgUpdate()) {
@@ -124,6 +86,7 @@ public class MessageController {
 	}
 
 	public int countUnredNotif() {
+		//loadMessages();
 		int count = 0;
 		for (Message message : this.msgList) {
 			if (message.isNotifUpdate()) {
@@ -142,7 +105,8 @@ public class MessageController {
 	}
 
 	public boolean hasCourseMessages() {
-		for (Message message : msgList) {
+		//loadMessages();
+		for (Message message : this.msgList) {
 			if (!message.isAdmin() && (!message.getMsgAudio().isEmpty() || !message.getNotifAudio().isEmpty())) {
 				return true;
 			}
@@ -151,7 +115,8 @@ public class MessageController {
 	}
 	
 	public boolean hasAdmMessages() {
-		for (Message message : msgList) {
+		//loadMessages();
+		for (Message message : this.msgList) {
 			if (message.isAdmin() && !message.getMsgAudio().isEmpty()) {
 				return true;
 			}
@@ -160,7 +125,8 @@ public class MessageController {
 	}
 	
 	public boolean hasUnreadCourseMessages() {
-		for (Message message : msgList) {
+		//loadMessages();
+		for (Message message : this.msgList) {
 			if ((message.isNewMessage() || message.isNewNotification()) && !message.isAdmin()) {
 				return true;
 			}
@@ -169,7 +135,8 @@ public class MessageController {
 	}
 
 	public boolean hasUnreadAdminMessages() {
-		for (Message message : msgList) {
+		//loadMessages();
+		for (Message message : this.msgList) {
 			if ((message.isNewMessage() || message.isNewNotification()) && message.isAdmin()) {
 				return true;
 			}
@@ -178,8 +145,9 @@ public class MessageController {
 	}
 
 	public ArrayList<Message> getCourseMessageList() {
+		//loadMessages();
 		ArrayList<Message> courseMessages = new ArrayList<Message>();
-		for (Message message : msgList) {
+		for (Message message : this.msgList) {
 			if (!message.isAdmin()) {
 				courseMessages.add(message);
 			}
@@ -188,7 +156,8 @@ public class MessageController {
 	}
 
 	public Message getMessage(int id) {
-		for (Message message : msgList) {
+		//loadMessages();
+		for (Message message : this.msgList) {
 			if (message.getId() == id) {
 				return message;
 			}

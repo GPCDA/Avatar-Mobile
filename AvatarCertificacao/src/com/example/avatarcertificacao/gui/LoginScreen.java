@@ -38,26 +38,25 @@ public class LoginScreen extends Activity implements OnClickListener {
         usernameEditText = (EditText) findViewById(R.idLoginScreen.login_edit_text);
         passwordEditText = (EditText) findViewById(R.idLoginScreen.senha_edit_text);
         Date today = new Date();
-        if (!SessionStore.getUserToken(this).isEmpty()) {
-        	if (SessionStore.getExpirationData(this) > today.getTime()) {
-				Intent intent = new Intent(LoginScreen.this, MainScreen.class);
-				startActivity(intent);
-				finish();
-        	}
-        }
-        
-		moodleUrlEditText.setText(SessionStore.getUrl(this));
-		usernameEditText.setText(SessionStore.getUsername(this));
-		passwordEditText.setText(SessionStore.getPassword(this));
-		if (!(SessionStore.getUrl(this).isEmpty() || 
-			SessionStore.getUsername(this).isEmpty() || 
-			SessionStore.getPassword(this).isEmpty())) {
-    		login();
-		}
-        
-        btnLogin.setOnClickListener(this);
-		toast = Toast.makeText(this, R.string.login_erro,Toast.LENGTH_LONG);
+        if ((!SessionStore.getUserToken(this).isEmpty()) 
+        	 && (SessionStore.getExpirationData(this) > today.getTime())) {
+			Intent intent = new Intent(LoginScreen.this, MainScreen.class);
+			startActivity(intent);
+			finish();
 
+        } else {
+			moodleUrlEditText.setText(SessionStore.getUrl(this));
+			usernameEditText.setText(SessionStore.getUsername(this));
+			passwordEditText.setText(SessionStore.getPassword(this));
+			if (!(SessionStore.getUrl(this).isEmpty() || 
+				SessionStore.getUsername(this).isEmpty() || 
+				SessionStore.getPassword(this).isEmpty())) {
+	    		login();
+			}
+	        
+	        btnLogin.setOnClickListener(this);
+			toast = Toast.makeText(this, R.string.login_erro,Toast.LENGTH_LONG);
+        }
     }
 
 	@Override

@@ -18,6 +18,8 @@ import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import com.example.avatarcertificacao.model.Visema;
 
@@ -192,6 +194,16 @@ public class Util {
 
 		return total.toString();
 	}
+	
+	public static boolean isNetworkAvailable(Context ctx) {
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null;
+	    
+	}
+
+
 
 	//  public void createNotification(){
 	//	// Prepare intent which is triggered if the

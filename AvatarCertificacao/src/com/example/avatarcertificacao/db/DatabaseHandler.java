@@ -68,8 +68,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// Adding new contact
 	public void addMessage(Message msg) {
+		Message oldMsg = getMessage(msg.getId());
 		SQLiteDatabase db = this.getWritableDatabase();
 
+		// Inserting Row
+		boolean update = false;
+		if (oldMsg != null) {
+			if ((msg.msgn == 0) && (msg.msgu == 0)) {
+				msg.msga = oldMsg.msga;
+				msg.msgv = oldMsg.msgv;
+			}
+			if ((msg.notn == 0) && (msg.notu == 0)) {
+				msg.nota = oldMsg.nota;
+				msg.notv = oldMsg.notv;
+			}
+			update = true;
+		}
+		
 		ContentValues values = new ContentValues();
 		values.put(KEY_ID, msg.getId()); // message Id
 		values.put(KEY_NAME, msg.getName()); // message Name
@@ -84,8 +99,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		values.put(KEY_NOTIF_N, msg.getNotn()); // message notn
 		values.put(KEY_MSG_N, msg.getMsgn()); // message msgn
 
-		// Inserting Row
-		db.insert(TABLE_MESSAGES, null, values);
+		if (update) {
+			db.update(TABLE_MESSAGES, values, KEY_ID + "=" + msg.getId(), null);
+		} else {
+			db.insert(TABLE_MESSAGES, null, values);
+		}
 		db.close(); // Closing database connection
 	}
 
@@ -96,9 +114,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		Cursor cursor = db.query(TABLE_MESSAGES, new String[] { KEY_ID, KEY_NAME, KEY_AVATAR, KEY_IS_MSG_UPDATE, KEY_IS_NOTIF_UPDATE,
 				KEY_MSG_VISEMA, KEY_MSG_AUDIO, KEY_NOTIF_VISEMA, KEY_NOTIF_AUDIO, KEY_PERFIL, KEY_MSG_N, KEY_NOTIF_N }, KEY_ID + "=?",
 				new String[] { String.valueOf(mId) }, null, null, null, null);
-		if (cursor != null)
+		if (cursor != null) {
 			cursor.moveToFirst();
-
+		} else {
+			return null;
+		}
 		int id = cursor.getInt(0);
 		String name = cursor.getString(1);
 		String avatar = cursor.getString(2);

@@ -1,5 +1,7 @@
 package com.example.avatarcertificacao.model;
 
+import java.util.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,23 +10,23 @@ public class Message {
 	public static final int MESSAGE = 0;
 	public static final int NOTIFICATION = 1;
 
-	private int id;
-	private String name;
-	private String pf;
-	private String avt;
-	private int msgu;
-	private int notu;
-	private int msgn;
-	private int notn;
-	private String msga;
-	private String nota;
-	private String msgv;
-	private String notv;
+	public int id;
+	public String name;
+	public String pf;
+	public String avt;
+	public int msgu;
+	public int notu;
+	public int msgn;
+	public int notn;
+	public String msga;
+	public String nota;
+	public String msgv;
+	public String notv;
 
 	public Message(JSONObject obj) {
 		super();
 		try {
-			if (obj.getString("id").isEmpty()) {
+			if (obj.getString("id") == "null") {
 				this.id = 0;
 			} else {
 				this.id = obj.getInt("id");
@@ -128,6 +130,26 @@ public class Message {
 	public Message() {
 		super();
 	}
+
+//	public Message(JSONObject jsonObject, List<Message> oldMessageList) {
+//		this(jsonObject);
+//		Message oldMsg = null;
+//		for (Message message : oldMessageList) {
+//			if (message.getId() == this.id) {
+//				oldMsg = message;
+//			}
+//		}
+//		if (oldMsg != null) {
+//			if ((this.msgn == 0) && (this.msgu == 0)) {
+//				this.msga = oldMsg.msga;
+//				this.msgv = oldMsg.msgv;
+//			}
+//			if ((this.notn == 0) && (this.notu == 0)) {
+//				this.nota = oldMsg.nota;
+//				this.notv = oldMsg.notv;
+//			}
+//		}
+//	}
 
 	public String getMsgAudio() {
 		return msga;

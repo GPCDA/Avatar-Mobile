@@ -4,8 +4,11 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
@@ -44,10 +47,12 @@ public class MainScreen extends Activity implements OnClickListener {
 		coursesMsgTextView = (TextView) findViewById(R.idMainScreen.courseMessagetextView);
 		adminMsgTextView = (TextView) findViewById(R.idMainScreen.admMessagetextView);
 		
-		loadMessages();
+		if (Util.isNetworkAvailable(this)) {
+			loadMessages();
+		}
 
 	}
-
+	
 	private void loadMessages() {
 
 		new AsyncTask<Void, Void, Void>() {
