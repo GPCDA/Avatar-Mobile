@@ -84,7 +84,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 			}
 			update = true;
 		}
-		
+
 		ContentValues values = new ContentValues();
 		values.put(KEY_ID, msg.getId()); // message Id
 		values.put(KEY_NAME, msg.getName()); // message Name
@@ -132,7 +132,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		int msgn = cursor.getInt(10);
 		int notn = cursor.getInt(11);
 
-		Message msg = new Message(id, name, perfil, avatar, isMsgUpdate, isNotifUpdate, msgAudio, notifAudio, msgVisema, notifVisema,msgn,notn);
+		Message msg = new Message(id, name, perfil, avatar, isMsgUpdate, isNotifUpdate, msgAudio, notifAudio, msgVisema, notifVisema, msgn,
+				notn);
 
 		if (db.isOpen()) {
 			db.close();
@@ -178,6 +179,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return messageList;
 	}
 
+	//Deleting single message
+	public void deleteCourse(Message message) {
+		SQLiteDatabase db = this.getWritableDatabase();
+		db.delete(TABLE_MESSAGES, KEY_ID + " = ?", new String[] { String.valueOf(message.getId()) });
+		db.close();
+	}
+
 	//	// Updating single contact
 	//	public int updateContact(Contact contact) {
 	//		SQLiteDatabase db = this.getWritableDatabase();
@@ -190,12 +198,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 	//		return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?", new String[] { String.valueOf(contact.getID()) });
 	//	}
 	//
-	//	// Deleting single contact
-	//	public void deleteContact(Contact contact) {
-	//		SQLiteDatabase db = this.getWritableDatabase();
-	//		db.delete(TABLE_CONTACTS, KEY_ID + " = ?", new String[] { String.valueOf(contact.getID()) });
-	//		db.close();
-	//	}
+	//	
 	//
 	//	// Getting contacts Count
 	//	public int getContactsCount() {

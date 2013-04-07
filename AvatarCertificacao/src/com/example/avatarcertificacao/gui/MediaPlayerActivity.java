@@ -68,9 +68,6 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		image = (ImageView) findViewById(R.id.anim_view);
 		avatarImgView = (ImageView) findViewById(R.id.avatar_imgview);
 
-		//TODO descomentar quando a relacao entre avatarId e imagens estiver pronta.
-		//this.pickAvatarImages();
-
 		btnPlayWarning = (ImageView) findViewById(R.id.playAvisoButton);
 		btnPlayWarning.setOnClickListener(this);
 		btnPlayMessage = (ImageView) findViewById(R.id.playMessageButton);
@@ -87,29 +84,24 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		} else {
 			courseTextView.setText(message.getName());
 		}
-
+		
+		this.pickAvatarImages();
+		
 		isEyeOpen = true;
 
 		doBlink();
 	}
 
 	private void pickAvatarImages() {
-		//TODO relacionar o type com as imagens de avatar no projeto.
 		
-		int type = Util.defineAvatarType(Integer.valueOf(message.getAvatarId()));
+		String resourceName = Util.defineAvatarType(Integer.valueOf(message.getAvatarId()));
 		
-//		switch (type) {
-//			case value:
-//				
-//				break;
-//
-//			default:
-//				break;
-//		}
+		String uri = "drawable/" + resourceName;
+		avatarResourceId = this.getResources().getIdentifier(uri, null, this.getPackageName());
 		
-//		avatarEyesClosedResourceId = *
-//		avatarResourceId = *		
+		String eyesClosedResourceUri = uri + Util.RESOURCE_EYES_CLOSED_SUFIX; 
 		
+		avatarEyesClosedResourceId = this.getResources().getIdentifier(eyesClosedResourceUri, null, this.getPackageName());
 		
 	}
 
@@ -121,11 +113,11 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 			public void run() {
 				if (isEyeOpen) {
 					delay = BLINKING_TIME;
-					avatarImgView.setImageResource(R.drawable.repouso_closed10);
+					avatarImgView.setImageResource(avatarEyesClosedResourceId);
 					isEyeOpen = false;
 				} else {
 					delay = EYESOPEN_DELAY;
-					avatarImgView.setImageResource(R.drawable.senhor);
+					avatarImgView.setImageResource(avatarResourceId);
 					isEyeOpen = true;
 				}
 				handler.postDelayed(this, delay);

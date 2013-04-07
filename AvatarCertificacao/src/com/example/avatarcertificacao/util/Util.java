@@ -26,6 +26,8 @@ import com.example.avatarcertificacao.model.Visema;
 public class Util {
 	public static final String FEMININO = "8";
 	public static final String MASCULINO = "2";
+	public static final String RESOURCE_PREFIX = "avatar_";
+	public static final String RESOURCE_EYES_CLOSED_SUFIX = "_closed";
 	public static final boolean isStub = false;
 	public static String loadList(Context context, String fileName) {
 		StringBuilder builder = new StringBuilder();
@@ -232,19 +234,15 @@ public class Util {
 	//    notificationManager.notify(0, noti); 
 	//}
 	
-	public static int defineAvatarType(int avatarId){
-		int resourceId = -1;
-		//TODO relacionar avatarId com imagens dos avatares
-//		switch (avatarId) {
-//			case value:
-//				
-//				break;
-//
-//			default:
-//				break;
-//		}
+	public static String defineAvatarType(int avatarId){
+		String resourceFile = RESOURCE_PREFIX;
+		if (avatarId <= 9) {
+			resourceFile = resourceFile + "0"; 
+		}
 		
-		return resourceId;
+		resourceFile = resourceFile + "" + avatarId;
+		
+		return resourceFile;
 	}
 	
 }
