@@ -34,7 +34,7 @@ public class SessionStore {
     public static boolean save(Context context, String token, long expiration) {
         Editor editor = context.getSharedPreferences(KEY, Context.MODE_PRIVATE).edit();
         editor.putString(TOKEN, token);
-        editor.putLong(EXPIRES, expiration);
+        editor.putLong(EXPIRES, expiration*1000);
 		return editor.commit();
     }
     

@@ -68,7 +68,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	// Adding new contact
 	public void addMessage(Message msg) {
-		Message oldMsg = getMessage(msg.getId());
+		Message oldMsg = null;
+		try {
+			oldMsg = getMessage(msg.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		// Inserting Row
@@ -114,7 +120,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		Cursor cursor = db.query(TABLE_MESSAGES, new String[] { KEY_ID, KEY_NAME, KEY_AVATAR, KEY_IS_MSG_UPDATE, KEY_IS_NOTIF_UPDATE,
 				KEY_MSG_VISEMA, KEY_MSG_AUDIO, KEY_NOTIF_VISEMA, KEY_NOTIF_AUDIO, KEY_PERFIL, KEY_MSG_N, KEY_NOTIF_N }, KEY_ID + "=?",
 				new String[] { String.valueOf(mId) }, null, null, null, null);
-		if (cursor != null) {
+		if ((cursor != null) && (cursor.getCount() > 0)) {
 			cursor.moveToFirst();
 		} else {
 			return null;
