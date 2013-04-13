@@ -3,7 +3,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@android:color/white">
 
     <TextView
         android:id="@+id/courseNameTextView"
@@ -20,8 +21,7 @@
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_margin="20dp"
-        android:background="@drawable/circle_margin" >
+        android:layout_margin="20dp">
 
         <ImageView
             android:id="@+id/avatar_imgview"
@@ -45,23 +45,59 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" 
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:gravity="center">
+		
+        <LinearLayout
+	        android:id="@+id/playAvisoButton"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_weight="1" 
+	        android:gravity="center"
+	        android:background="@drawable/circle_margin"
+	        android:layout_marginRight="5dp">
+	        
+            <ImageView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:contentDescription="@null"
+	            android:src="@drawable/aviso_icon"/>
+			<TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:padding="4dp"
+		        android:text="@string/notification"
+		        android:textColor="#3e4095"
+		        android:textSize="14sp"/>
+		</LinearLayout>
+		<LinearLayout
+	        android:id="@+id/playMessageButton"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:orientation="horizontal"
+	        android:layout_weight="1" 
+	        android:gravity="center"
+	        android:background="@drawable/circle_margin"
+	        android:layout_marginLeft="5dp">
+	        
+	        <ImageView
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:contentDescription="@null"
+	            android:src="@drawable/message_icon" />
+	        <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:gravity="center"
+		        android:padding="4dp"
+		        android:text="@string/message"
+		        android:textColor="#3e4095"
+		        android:textSize="14sp"/>
+		</LinearLayout>
 
-        <ImageView
-            android:id="@+id/playAvisoButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@null"
-            android:src="@drawable/aviso_icon" 
-            android:layout_marginRight="10dp"/>
-
-        <ImageView
-            android:id="@+id/playMessageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:contentDescription="@null"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/message_icon" />
         
     </LinearLayout>
     <TextView
