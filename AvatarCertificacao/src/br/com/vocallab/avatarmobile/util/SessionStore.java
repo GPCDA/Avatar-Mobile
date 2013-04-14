@@ -18,8 +18,7 @@ package br.com.vocallab.avatarmobile.util;
 
 import android.content.Context;
 import android.content.SharedPreferences.Editor;
-
-import com.example.avatarcertificacao.R;
+import br.com.vocallab.avatarmobile.R;
 
 public class SessionStore {
 

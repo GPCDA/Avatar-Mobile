@@ -2,8 +2,7 @@ package br.com.vocallab.avatarmobile.gui;
 
 import android.app.Activity;
 import android.os.Bundle;
-
-import com.example.avatarcertificacao.R;
+import br.com.vocallab.avatarmobile.R;
 
 
 public class SettingsScreen extends Activity {

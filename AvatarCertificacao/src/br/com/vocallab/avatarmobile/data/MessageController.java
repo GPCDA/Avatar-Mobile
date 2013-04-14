@@ -1,6 +1,5 @@
 package br.com.vocallab.avatarmobile.data;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,9 +10,6 @@ import org.json.JSONObject;
 import android.content.Context;
 import br.com.vocallab.avatarmobile.db.DatabaseHandler;
 import br.com.vocallab.avatarmobile.model.Message;
-import br.com.vocallab.avatarmobile.util.Util;
-
-import com.google.gson.Gson;
 
 public class MessageController {
 	private static MessageController instance = null;
@@ -67,6 +63,12 @@ public class MessageController {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public boolean existNewMessage(String messageJson) throws JSONException {
+		JSONObject json = new JSONObject(messageJson);
+		
+		return !json.isNull("content");
 	}
 	
 	public List<Message> getMessageList() {

@@ -15,10 +15,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import br.com.vocallab.avatarmobile.R;
 import br.com.vocallab.avatarmobile.util.SessionStore;
 import br.com.vocallab.avatarmobile.util.Util;
-
-import com.example.avatarcertificacao.R;
 
 public class LoginScreen extends Activity implements OnClickListener {
 	

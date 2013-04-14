@@ -9,9 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import br.com.vocallab.avatarmobile.R;
 import br.com.vocallab.avatarmobile.model.Message;
-
-import com.example.avatarcertificacao.R;
 
 public class CourseListAdapter extends ArrayAdapter<Message> {
 

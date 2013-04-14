@@ -3,11 +3,16 @@ package br.com.vocallab.avatarmobile.gui;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,12 +21,11 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.vocallab.avatarmobile.R;
 import br.com.vocallab.avatarmobile.data.MessageController;
 import br.com.vocallab.avatarmobile.model.Message;
 import br.com.vocallab.avatarmobile.util.SessionStore;
 import br.com.vocallab.avatarmobile.util.Util;
-
-import com.example.avatarcertificacao.R;
 
 public class MainScreen extends Activity implements OnClickListener {
 	LinearLayout btnCourses;
@@ -43,13 +47,13 @@ public class MainScreen extends Activity implements OnClickListener {
 
 		coursesMsgTextView = (TextView) findViewById(R.idMainScreen.courseMessagetextView);
 		adminMsgTextView = (TextView) findViewById(R.idMainScreen.admMessagetextView);
-		
+
 		if (Util.isNetworkAvailable(this)) {
 			loadMessages();
 		}
 
 	}
-	
+
 	private void loadMessages() {
 
 		new AsyncTask<Void, Void, Void>() {
@@ -62,7 +66,7 @@ public class MainScreen extends Activity implements OnClickListener {
 				showDialog();
 				url = SessionStore.getUrl(MainScreen.this);
 				token = SessionStore.getUserToken(MainScreen.this);
-				
+
 				if (url.endsWith(getString(R.string.bar))) {
 					url = url + getString(R.string.WSUrl);
 				} else {
@@ -86,15 +90,15 @@ public class MainScreen extends Activity implements OnClickListener {
 		}.execute();
 
 	}
-	
+
 	@Override
 	protected void onResume() {
 		super.onResume();
 		updateMessageStatus();
 	}
-	
+
 	private void updateMessageStatus() {
-		
+
 		if (MessageController.getInstance(MainScreen.this).hasUnreadCourseMessages()) {
 			coursesMsgTextView.setText(R.string.course_new_message);
 			coursesMsgTextView.setTypeface(null, Typeface.BOLD);
@@ -105,7 +109,7 @@ public class MainScreen extends Activity implements OnClickListener {
 			coursesMsgTextView.setText(R.string.course_no_message);
 			coursesMsgTextView.setTypeface(null, Typeface.NORMAL);
 		}
-		
+
 		if (MessageController.getInstance(MainScreen.this).hasUnreadAdminMessages()) {
 			adminMsgTextView.setText(R.string.adm_new_message);
 			adminMsgTextView.setTypeface(null, Typeface.BOLD);
@@ -116,14 +120,15 @@ public class MainScreen extends Activity implements OnClickListener {
 			adminMsgTextView.setText(R.string.adm_no_message);
 			adminMsgTextView.setTypeface(null, Typeface.NORMAL);
 		}
+
+		Util.startService(this);
 	}
 
 	ProgressDialog progressDialog;
 
 	public void showDialog() {
 		if (progressDialog == null) {
-			progressDialog = ProgressDialog.show(this,
-					getString(R.string.empty), getString(R.string.loading));
+			progressDialog = ProgressDialog.show(this, getString(R.string.empty), getString(R.string.loading));
 		} else {
 			progressDialog.setTitle(getString(R.string.empty));
 			progressDialog.setMessage(getString(R.string.loading));
@@ -144,14 +149,14 @@ public class MainScreen extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		// TODO Auto-generated method stub
 		switch (view.getId()) {
-		case R.idMainScreen.btn_courses:
-			showCoursesListScreen();
-			break;
-		case R.idMainScreen.btn_admin:
-			loadAdminMessage();
-			break;
-		default:
-			break;
+			case R.idMainScreen.btn_courses:
+				showCoursesListScreen();
+				break;
+			case R.idMainScreen.btn_admin:
+				loadAdminMessage();
+				break;
+			default:
+				break;
 		}
 
 	}
@@ -168,29 +173,28 @@ public class MainScreen extends Activity implements OnClickListener {
 		} else {
 			Toast.makeText(this, R.string.no_messages, Toast.LENGTH_LONG).show();
 		}
-		
+
 	}
 
 	private void showCoursesListScreen() {
 		Intent intent = new Intent(this, CourseListActivity.class);
 		startActivity(intent);
 	}
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.menu.option_menu, menu);
-	    return true;
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.option_menu, menu);
+		return true;
 	}
-	
+
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 		switch (item.getItemId()) {
-//		case R.optionMenu.settings:
-//			intent = new Intent(this, SettingsScreen.class);
-//			startActivity(intent);
-//			break;
+		case R.optionMenu.settings:
+			showSettingsOptions();
+			break;
 		case R.optionMenu.logout:
 			if (SessionStore.logout(this)) {
 				intent = new Intent(this, LoginScreen.class);
@@ -208,6 +212,36 @@ public class MainScreen extends Activity implements OnClickListener {
 		return false;
 		
 	}
-	
-	   
+
+	@Override
+	protected void onNewIntent(Intent intent) {
+		// TODO Auto-generated method stub
+		super.onNewIntent(intent);
+	}
+
+	public void showSettingsOptions() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		builder.setTitle(getString(R.string.pick_interval)).setCancelable(false)
+				.setSingleChoiceItems(R.array.syncFrequency, 0, new DialogInterface.OnClickListener() {
+
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.this.getApplicationContext());
+						Editor editor = prefs.edit();
+
+						String[] items = getResources().getStringArray(R.array.syncFrequency);
+						String value = items[which];
+						int interval = 0;
+						if (!value.equals("Nunca")) {
+							interval = Integer.valueOf(value.replace(" Minutos", ""));
+						}
+
+						editor.putInt("interval", interval);
+						
+						dialog.dismiss();
+					}
+				});
+		AlertDialog alert = builder.create();
+		alert.show();
+	}
 }

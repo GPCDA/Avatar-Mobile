@@ -11,10 +11,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
+import br.com.vocallab.avatarmobile.R;
 import br.com.vocallab.avatarmobile.data.MessageController;
 import br.com.vocallab.avatarmobile.util.SessionStore;
-
-import com.example.avatarcertificacao.R;
 
 public class CourseListActivity extends Activity implements OnItemClickListener {
 

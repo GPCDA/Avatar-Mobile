@@ -1,7 +1,5 @@
 package br.com.vocallab.avatarmobile.model;
 
-import java.util.List;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 

@@ -25,12 +25,11 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import br.com.vocallab.avatarmobile.R;
 import br.com.vocallab.avatarmobile.data.MessageController;
 import br.com.vocallab.avatarmobile.model.Message;
 import br.com.vocallab.avatarmobile.model.Visema;
 import br.com.vocallab.avatarmobile.util.Util;
-
-import com.example.avatarcertificacao.R;
 
 public class MediaPlayerActivity extends Activity implements OnClickListener {
 

@@ -17,10 +17,18 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 
+import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.SystemClock;
+import android.preference.PreferenceManager;
 import br.com.vocallab.avatarmobile.model.Visema;
+import br.com.vocallab.avatarmobile.service.NotificationService;
 
 
 public class Util {
@@ -244,5 +252,21 @@ public class Util {
 		
 		return resourceFile;
 	}
+	
+	public static void startService(Activity activity) {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(activity);
+	    int minutes = prefs.getInt("interval",1);
+	    AlarmManager am = (AlarmManager) activity.getSystemService(Activity.ALARM_SERVICE);
+	    Intent i = new Intent(activity, NotificationService.class);
+	    PendingIntent pi = PendingIntent.getService(activity, 0, i, 0);
+	    am.cancel(pi);
+	    // by my own convention, minutes <= 0 means notifications are disabled
+	    if (minutes > 0) {
+	        am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+	            SystemClock.elapsedRealtime() + minutes*60*1000,
+	            minutes*60*1000, pi);
+	    }
+	}
+
 	
 }

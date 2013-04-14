@@ -10,8 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
-
-import com.example.avatarcertificacao.R;
+import br.com.vocallab.avatarmobile.R;
 
 public class SplashScreen extends Activity implements OnClickListener{
     
@@ -44,5 +43,5 @@ public class SplashScreen extends Activity implements OnClickListener{
 		startActivity(new Intent(SplashScreen.this, LoginScreen.class));
 		finish();
 	}
- 
+	 
 }
