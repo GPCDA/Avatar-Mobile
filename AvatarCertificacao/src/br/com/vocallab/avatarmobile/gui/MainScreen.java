@@ -24,6 +24,7 @@ import android.widget.Toast;
 import br.com.vocallab.avatarmobile.R;
 import br.com.vocallab.avatarmobile.data.MessageController;
 import br.com.vocallab.avatarmobile.model.Message;
+import br.com.vocallab.avatarmobile.service.NotificationService;
 import br.com.vocallab.avatarmobile.util.SessionStore;
 import br.com.vocallab.avatarmobile.util.Util;
 
@@ -234,9 +235,12 @@ public class MainScreen extends Activity implements OnClickListener {
 						int interval = 0;
 						if (!value.equals("Nunca")) {
 							interval = Integer.valueOf(value.replace(" Minutos", ""));
+						} else {
+							stopService(new Intent(MainScreen.this,NotificationService.class));
 						}
 
 						editor.putInt("interval", interval);
+						editor.commit();
 						
 						dialog.dismiss();
 					}

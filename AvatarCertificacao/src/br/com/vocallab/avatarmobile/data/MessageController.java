@@ -38,25 +38,23 @@ public class MessageController {
 		this.msgList = db.getAllMessages();
 	}
 
-
-
 	public void saveOnDB(String messageJson) {
 		ArrayList<Message> messageList = null;
 		try {
 			if (!messageJson.isEmpty()) {
 				messageList = new ArrayList<Message>();
-	
+
 				JSONObject json = new JSONObject(messageJson);
-	
+
 				JSONArray jArray = json.getJSONArray("content");
-	
+
 				for (int i = 0; i < jArray.length(); i++) {
-					Message msg =  new Message(jArray.getJSONObject(i));
+					Message msg = new Message(jArray.getJSONObject(i));
 					messageList.add(msg);
 				}
 				this.msgList = messageList;
 				for (Message current : this.msgList) {
-					
+
 					db.addMessage(current);
 				}
 			}
@@ -64,13 +62,18 @@ public class MessageController {
 			e.printStackTrace();
 		}
 	}
-	
-	public boolean existNewMessage(String messageJson) throws JSONException {
-		JSONObject json = new JSONObject(messageJson);
-		
-		return !json.isNull("content");
+
+	public boolean existNewMessage() {
+
+		for (Message current : this.msgList) {
+			if (current.msgn == 1 || current.notn == 1) {
+				return true;
+			}
+		}
+
+		return false;
 	}
-	
+
 	public List<Message> getMessageList() {
 		//loadMessages();
 		return this.msgList;
@@ -115,7 +118,7 @@ public class MessageController {
 		}
 		return false;
 	}
-	
+
 	public boolean hasAdmMessages() {
 		//loadMessages();
 		for (Message message : this.msgList) {
@@ -125,7 +128,7 @@ public class MessageController {
 		}
 		return false;
 	}
-	
+
 	public boolean hasUnreadCourseMessages() {
 		//loadMessages();
 		for (Message message : this.msgList) {

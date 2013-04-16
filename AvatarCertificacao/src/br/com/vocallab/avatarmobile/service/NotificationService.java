@@ -10,9 +10,11 @@ import android.os.AsyncTask;
 import android.os.IBinder;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.util.Log;
 import br.com.vocallab.avatarmobile.R;
 import br.com.vocallab.avatarmobile.data.MessageController;
 import br.com.vocallab.avatarmobile.gui.LoginScreen;
+import br.com.vocallab.avatarmobile.gui.MainScreen;
 import br.com.vocallab.avatarmobile.util.SessionStore;
 import br.com.vocallab.avatarmobile.util.Util;
 
@@ -74,8 +76,10 @@ public class NotificationService extends Service {
 		protected Void doInBackground(Void... params) {
 			try {
 				if (!token.equals("")) {
-					existNewMessages = MessageController.getInstance(NotificationService.this).existNewMessage(
-							Util.loadMessages(url, token));
+					MessageController.getInstance(NotificationService.this).saveOnDB(Util.loadMessages(url, token));
+					
+					existNewMessages = MessageController.getInstance(NotificationService.this).existNewMessage();
+					
 				} else {
 					this.cancel(true);
 				}
@@ -97,6 +101,9 @@ public class NotificationService extends Service {
 		@Override
 		protected void onPostExecute(Void result) {
 			// handle your data
+			
+			Log.i("MENSAGENS", "NEW MESSAGES" + existNewMessages);
+			
 			if (existNewMessages) {
 				showNotification();
 			}
