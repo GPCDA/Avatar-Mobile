@@ -41,8 +41,8 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 	private static final int EYESOPEN_DELAY = 5000;
 
 	private MediaPlayer mp;
-	private LinearLayout btnPlayWarning;
-	private LinearLayout btnPlayMessage;
+	private ImageView btnPlayWarning;
+	private ImageView btnPlayMessage;
 	private TextView courseTextView;
 	public ArrayList<Visema> mVisemaList;
 	private ArrayList<byte[]> bufferedImgs;
@@ -68,9 +68,9 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 		image = (ImageView) findViewById(R.id.anim_view);
 		avatarImgView = (ImageView) findViewById(R.id.avatar_imgview);
 
-		btnPlayWarning = (LinearLayout) findViewById(R.id.playAvisoButton);
+		btnPlayWarning = (ImageView) findViewById(R.id.playAvisoButton);
 		btnPlayWarning.setOnClickListener(this);
-		btnPlayMessage = (LinearLayout) findViewById(R.id.playMessageButton);
+		btnPlayMessage = (ImageView) findViewById(R.id.playMessageButton);
 		btnPlayMessage.setOnClickListener(this);
 
 		courseTextView = (TextView) findViewById(R.id.courseNameTextView);
@@ -81,8 +81,20 @@ public class MediaPlayerActivity extends Activity implements OnClickListener {
 
 		if (message.getName().isEmpty()) {
 			courseTextView.setText(R.string.admin);
+			btnPlayWarning.setVisibility(View.GONE);
 		} else {
 			courseTextView.setText(message.getName());
+			if (message.getNotifAudio().isEmpty()) {
+				btnPlayWarning.setImageResource(R.drawable.btn_play_notification_off);
+			} else {
+				btnPlayWarning.setImageResource(R.drawable.btn_play_notification_on);
+			}
+		}
+		
+		if (message.getMsgAudio().isEmpty()) {
+			btnPlayMessage.setImageResource(R.drawable.btn_play_message_off);
+		} else {
+			btnPlayMessage.setImageResource(R.drawable.btn_play_message_on);
 		}
 		
 		this.pickAvatarImages();

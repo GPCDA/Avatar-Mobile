@@ -2,9 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@android:color/white"
     android:gravity="center_horizontal"
-    android:orientation="vertical" 
-    android:background="@android:color/white">
+    android:orientation="vertical" >
 
     <TextView
         android:id="@+id/courseNameTextView"
@@ -21,7 +21,7 @@
     <RelativeLayout
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp" >
 
         <ImageView
             android:id="@+id/avatar_imgview"
@@ -44,68 +44,28 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" 
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:gravity="center">
-		
-        <LinearLayout
-	        android:id="@+id/playAvisoButton"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:orientation="horizontal"
-	        android:layout_weight="1" 
-	        android:gravity="center"
-	        android:background="@drawable/circle_margin"
-	        android:layout_marginRight="5dp">
-	        
-            <ImageView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:contentDescription="@null"
-	            android:src="@drawable/aviso_icon"/>
-			<TextView
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:gravity="center"
-		        android:padding="4dp"
-		        android:text="@string/notification"
-		        android:textColor="#3e4095"
-		        android:textSize="14sp"/>
-		</LinearLayout>
-		<LinearLayout
-	        android:id="@+id/playMessageButton"
-	        android:layout_width="0dp"
-	        android:layout_height="wrap_content"
-	        android:orientation="horizontal"
-	        android:layout_weight="1" 
-	        android:gravity="center"
-	        android:background="@drawable/circle_margin"
-	        android:layout_marginLeft="5dp">
-	        
-	        <ImageView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:contentDescription="@null"
-	            android:src="@drawable/message_icon" />
-	        <TextView
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:gravity="center"
-		        android:padding="4dp"
-		        android:text="@string/message"
-		        android:textColor="#3e4095"
-		        android:textSize="14sp"/>
-		</LinearLayout>
-
-        
-    </LinearLayout>
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
         android:gravity="center"
-        android:padding="4dp"
-        android:text="@string/click_to_play"
-        android:textColor="#3e4095"
-        android:textSize="14sp"/>
+        android:orientation="horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
+
+        <ImageView
+            android:id="@+id/playAvisoButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:contentDescription="@null"
+            android:layout_weight="1"
+            android:src="@drawable/btn_play_notification_off" />
+
+        <ImageView
+            android:id="@+id/playMessageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:contentDescription="@null"
+            android:src="@drawable/btn_play_message_off" />
+    </LinearLayout>
+
 </LinearLayout>
