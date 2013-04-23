@@ -121,8 +121,7 @@ public class MainScreen extends Activity implements OnClickListener {
 			adminMsgTextView.setText(R.string.adm_no_message);
 			adminMsgTextView.setTypeface(null, Typeface.NORMAL);
 		}
-
-		Util.startService(this);
+		
 	}
 
 	ProgressDialog progressDialog;
@@ -236,12 +235,12 @@ public class MainScreen extends Activity implements OnClickListener {
 						if (!value.equals("Nunca")) {
 							interval = Integer.valueOf(value.replace(" Minutos", ""));
 						} else {
-							stopService(new Intent(MainScreen.this,NotificationService.class));
+							interval = 0;
 						}
 
 						editor.putInt("interval", interval);
 						editor.commit();
-						
+						Util.startService(MainScreen.this);
 						dialog.dismiss();
 					}
 				});

@@ -27,6 +27,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.SystemClock;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import br.com.vocallab.avatarmobile.model.Visema;
 import br.com.vocallab.avatarmobile.service.NotificationService;
 
@@ -258,6 +259,7 @@ public class Util {
 		PendingIntent pi = PendingIntent.getService(activity, 0, i, 0);
 		am.cancel(pi);
 		// by my own convention, minutes <= 0 means notifications are disabled
+		Log.i("MENSAGENS", "SERVICE STARTED");
 		if (minutes > 0) {
 			am.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + minutes * 60 * 1000,
 					minutes * 60 * 1000, pi);
