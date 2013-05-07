@@ -53,7 +53,7 @@
         <service android:name=".service.NotificationService" >
         </service>
 
-        <receiver android:name=".BootReceiver" >
+        <receiver android:name=".service.BootReceiver" >
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
