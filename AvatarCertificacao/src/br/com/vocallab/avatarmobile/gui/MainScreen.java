@@ -121,7 +121,7 @@ public class MainScreen extends Activity implements OnClickListener {
 			adminMsgTextView.setText(R.string.adm_no_message);
 			adminMsgTextView.setTypeface(null, Typeface.NORMAL);
 		}
-		
+
 	}
 
 	ProgressDialog progressDialog;
@@ -192,25 +192,25 @@ public class MainScreen extends Activity implements OnClickListener {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		Intent intent;
 		switch (item.getItemId()) {
-		case R.optionMenu.settings:
-			showSettingsOptions();
-			break;
-		case R.optionMenu.logout:
-			if (SessionStore.logout(this)) {
-				intent = new Intent(this, LoginScreen.class);
-				startActivity(intent);
-				finish();
-			} else {
-				Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
-			}
-			
-			break;
+			case R.optionMenu.settings:
+				showSettingsOptions();
+				break;
+			case R.optionMenu.logout:
+				if (SessionStore.logout(this)) {
+					intent = new Intent(this, LoginScreen.class);
+					startActivity(intent);
+					finish();
+				} else {
+					Toast.makeText(this, R.string.logout_problem, Toast.LENGTH_LONG).show();
+				}
 
-		default:
-			break;
+				break;
+
+			default:
+				break;
 		}
 		return false;
-		
+
 	}
 
 	@Override
@@ -220,9 +220,10 @@ public class MainScreen extends Activity implements OnClickListener {
 	}
 
 	public void showSettingsOptions() {
+		int lastSelectedItem = getIntervalFromPreferences();
 		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-		builder.setTitle(getString(R.string.pick_interval)).setCancelable(false)
-				.setSingleChoiceItems(R.array.syncFrequency, 0, new DialogInterface.OnClickListener() {
+		builder.setTitle(getString(R.string.pick_interval)).setCancelable(true)
+				.setSingleChoiceItems(R.array.syncFrequency, lastSelectedItem, new DialogInterface.OnClickListener() {
 
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
@@ -239,6 +240,7 @@ public class MainScreen extends Activity implements OnClickListener {
 						}
 
 						editor.putInt("interval", interval);
+						editor.putInt("optionIndex", which);
 						editor.commit();
 						Util.startService(MainScreen.this);
 						dialog.dismiss();
@@ -246,5 +248,11 @@ public class MainScreen extends Activity implements OnClickListener {
 				});
 		AlertDialog alert = builder.create();
 		alert.show();
+	}
+
+	private int getIntervalFromPreferences() {
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainScreen.this.getApplicationContext());
+		return prefs.getInt("optionIndex", 0);
+
 	}
 }
