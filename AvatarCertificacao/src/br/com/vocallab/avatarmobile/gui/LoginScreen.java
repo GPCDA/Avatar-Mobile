@@ -37,6 +37,8 @@ public class LoginScreen extends Activity implements OnClickListener {
         usernameEditText = (EditText) findViewById(R.idLoginScreen.login_edit_text);
         passwordEditText = (EditText) findViewById(R.idLoginScreen.senha_edit_text);
         Date today = new Date();
+        
+        
         if ((!SessionStore.getUserToken(this).isEmpty()) 
         	 && (SessionStore.getExpirationData(this) > today.getTime())) {
 			Intent intent = new Intent(LoginScreen.this, MainScreen.class);
@@ -62,10 +64,13 @@ public class LoginScreen extends Activity implements OnClickListener {
 	public void onClick(View view) {
 		switch (view.getId()) {
 			case R.idLoginScreen.login_btn:
+				Intent intent = new Intent(LoginScreen.this, MainScreen.class);
+				startActivity(intent);
+				finish();
 				if (!moodleUrlEditText.getText().toString().isEmpty()) {
-					login();
+					//login();
 				} else {
-					toast.show();
+					//toast.show();
 				}
 				break;
 

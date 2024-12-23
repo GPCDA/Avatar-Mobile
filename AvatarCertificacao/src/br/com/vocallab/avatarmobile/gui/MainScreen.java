@@ -50,7 +50,7 @@ public class MainScreen extends Activity implements OnClickListener {
 		adminMsgTextView = (TextView) findViewById(R.idMainScreen.admMessagetextView);
 
 		if (Util.isNetworkAvailable(this)) {
-			loadMessages();
+			//loadMessages();
 		}
 
 	}

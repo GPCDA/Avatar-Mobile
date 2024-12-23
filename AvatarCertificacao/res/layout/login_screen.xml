@@ -74,7 +74,7 @@
                     android:paddingRight="20dp"
                     android:padding="10dp"
                     android:background="@drawable/circle_margin"
-                    android:text="@string/entrar" />
+                    android:text="@string/login" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
